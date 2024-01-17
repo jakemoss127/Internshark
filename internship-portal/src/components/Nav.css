@@ -1,0 +1,72 @@
+.nav-border{
+    margin-top: 1rem;
+    width: 80rem;
+    height: 3rem;
+    border-radius: 0.625rem;
+    border: 1px solid rgba(229, 229, 229, 0.2); 
+    background: rgba(255, 255, 255, 0.00);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    float: left;
+    margin-left: 2rem;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    color: #b9b9b9;
+    margin-left: 0.5rem;
+}
+
+a {
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    color: #b9b9b9;
+    margin-right: 2rem;
+    text-decoration: none; 
+    transition: 0.4s;
+}
+
+
+a:hover {
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.authentication-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.sign-up {
+    background: #181919;
+    border-radius: 0.625rem;
+    padding: 0.5rem 1rem;
+    color: #b9b9b9;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: 0.6s;
+}
+
+.sign-up:hover {
+    background: #353535;
+    color: #979797;
+    transition: 0.6s;
+}
