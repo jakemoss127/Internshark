@@ -23,7 +23,7 @@ function App() {
             <button className='see-more'>
               View the List
             </button>
-            <a>News</a>
+            <a>Other News</a>
           </div>
         </div>
         <div className='footer-image'>
