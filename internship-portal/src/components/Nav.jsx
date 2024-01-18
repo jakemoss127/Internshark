@@ -1,10 +1,17 @@
-import React from 'react'
-import './Nav.css'
-import internlogo from '../assets/internshark.svg'
+import React, { useEffect } from 'react';
+import {useState} from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import './Nav.css';
+import internlogo from '../assets/internshark.svg';
 
 const Nav = () => {
+
   return (
-    <div className='nav-border'>
+    <motion.div className='nav-border'
+      initial={{y: -100}}
+      animate={{y: 0}}
+      transition={{duration: 1, ease: 'easeInOut'}}
+      >
         <div className='logo-container'>
           <img src={internlogo} alt="Internshark Logo" className="logo" style={{maxHeight: '25px', maxWidth: '25px'}}/>
           <h1 className="logo-text">Internshark</h1>
@@ -22,7 +29,7 @@ const Nav = () => {
           <a>Sign In</a>
           <button className='sign-up'>Get Started</button>
         </div>
-    </div>
+    </motion.div>
   )
 }
 

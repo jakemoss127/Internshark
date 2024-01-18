@@ -8,8 +8,9 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  background-image: radial-gradient(circle, #05090f, #020a16, #010a1b, #010a20, #020a25);
-  height: 120vh;
+  background: rgb(0,7,79);
+  background: linear-gradient(0deg, rgb(0, 4, 52) 0%, rgba(0,0,0,1) 100%);
+  height: 115vh;
 }
 
 
@@ -83,7 +84,8 @@
   justify-content: top;
   align-items: center;
   flex-direction: column;
-  background-image: radial-gradient(circle, #05090f, #020a16, #010a1b, #010a20, #020a25);
+  background: rgb(0,7,79);
+  background: linear-gradient(180deg, rgb(0, 4, 52) 0%, rgba(0,0,0,1) 100%);
   height: 100vh;
 }
 
@@ -92,10 +94,18 @@
   font-size: 1.2rem;
   font-family: 'Inter', sans-serif;
   color: #b9b9b9;
+  margin-bottom: 1rem;
 }
 
 .college-svg{
   opacity: 0.7;
-  max-width: 50rem;
-  max-height: 40rem;
+  scale: 0.9;
+}
+
+.hired-faster {
+  margin-top: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
