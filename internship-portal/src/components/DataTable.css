@@ -1,0 +1,27 @@
+html, body{
+    height: 100%;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+table {
+    margin-top: 4rem;
+    width: 800px;
+    max-height: 800px;
+    border-collapse: collapse;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+thead {
+    font-size: large;
+    margin-bottom: 1rem;
+}
