@@ -5,7 +5,6 @@ import './Nav.css';
 import internlogo from '../assets/internshark.svg';
 
 const Nav = () => {
-
   return (
     <motion.div className='nav-border'
       initial={{y: -100}}
@@ -18,11 +17,11 @@ const Nav = () => {
         </div>
         <div className="middle-menu">
           <nav className="navbar">
-            <a>Home</a>
+            <a href="/">Home</a>
             <a>Pricing</a>
-            <a>GitHub</a>
+            <a href="https://github.com/jakemoss127" target='_blank'>GitHub</a>
             <a>News</a>
-            <a>Chart</a>
+            <a href="/chart">Chart</a>
           </nav>
         </div>
         <div className="authentication-menu">
