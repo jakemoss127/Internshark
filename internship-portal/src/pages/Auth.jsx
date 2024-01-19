@@ -1,23 +1,39 @@
-import React from 'react'
-import { auth, provider } from '../config/firebase.js'
-import { signInWithPopup } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
-import { useUser } from '../context/UserContext';
+import React, { useRef, useState, useEffect } from "react";
+import { UserAuth } from '../context/AuthContext.jsx';
 
 const Auth = () => {
 
-    const { setUserName } = useUser();
+  const {user, googleSignIn, logOut} = UserAuth();
+  const [loading, setLoading] = useState(true); 
 
-    const signInWithGoogle = async () => {
-        const results = await signInWithPopup(auth, provider);
-        console.log(results)
-        setUserName(results.user.displayName);
-    };
+  const handleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50))
+        setLoading(false)
+    }
+    checkAuthentication()
+}, [user])
 
   return (
     <button
         className='sign-up'
-          onClick={signInWithGoogle}
+          onClick={handleSignIn}
         >
           Sign in with Google
     </button>

@@ -4,11 +4,11 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import './Nav.css';
 import internlogo from '../assets/internshark.svg';
 import Auth from '../pages/Auth';
-import { useUser } from '../context/UserContext';
+import { UserAuth } from '../context/AuthContext';
 
 const Nav = () => {
 
-  const { userName } = useUser();
+  const {user, logOut} = UserAuth();
 
   return (
     <motion.div className='nav-border'
@@ -30,9 +30,9 @@ const Nav = () => {
           </nav>
         </div>
         <div className="authentication-menu">
-          {!userName ? <a>Sign In</a> : <a>Welcome, {userName}</a>}
-          {!userName && <Auth />}
-          {userName && <button className='sign-up'>Sign out</button>}
+          {!user ? <a>Sign In</a> : <a>Welcome, {user.displayName}</a>}
+          {!user && <Auth />}
+          {user && <button className='sign-up' onClick={logOut}>Sign out</button>}
         </div>
     </motion.div>
   )
