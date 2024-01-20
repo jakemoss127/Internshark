@@ -1,27 +1,21 @@
-html, body{
-    height: 100%;
-}
-
-.data-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
 table {
     margin-top: 4rem;
-    width: 800px;
-    max-height: 800px;
+    width: 100%;
     border-collapse: collapse;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(48, 38, 66, 0.377);
     color: white;
     font-family: 'Inter', sans-serif;
+    border-radius: 20px;
+    height: 50vh;
+    overflow-y: scroll;
+    width: 50vw;
+    padding: 10px;
 }
 
 thead {
+    position: sticky;
     font-size: large;
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
+    border-bottom: solid 1px white;
+    border: solid 1px white;
 }

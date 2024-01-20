@@ -7,7 +7,7 @@ import collegeSvg from '../assets/colleges2.svg';
 
 function Home() {
   return (
-    <div className="App">
+    <div className="Home">
       <div className='hero'>
         <div className="nav-container">
           <Nav />
@@ -30,6 +30,15 @@ function Home() {
           <img src={heroImage} alt="hero-image" />
         </div>
       </div>
+      <div className='features-section'>
+        <h1 className='feature-title'>Our Features Transcend The Usual</h1>
+        <div className='feature-row'>
+          <div className='card'></div>
+          <div className='card'></div>
+          <div className='card'></div>
+          <div className='card'></div>
+        </div>
+      </div>
       <motion.div className='trusted-section'>
         <h1 className='trusted-title'>Trusted by students at</h1>
         <motion.div className="image-container"
@@ -38,11 +47,7 @@ function Home() {
           transition={{duration: 1, ease: 'easeInOut'}}
         >
           <img src={collegeSvg} alt="colleges" className='college-svg' />
-        <div className="hired-faster">
-          <h1 className='title'>Get Hired Faster</h1>
-          <h1 className="subtitle">Students using Intenrshark are more likely to be hired</h1>
-        </div>
-        </motion.div>
+      </motion.div>
       </motion.div>
     </div>
   )

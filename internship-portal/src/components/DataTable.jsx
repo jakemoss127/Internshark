@@ -36,7 +36,7 @@ const DataTable = () => {
             <table {...getTableBodyProps}>
                 <thead>
                     {headerGroups.map((headerGroup) => 
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr className='header-group' {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => 
                                 <th {...column.getHeaderProps()}>
                                     {column.render("Header")}

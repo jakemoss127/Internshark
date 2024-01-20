@@ -24,13 +24,13 @@ const Nav = () => {
           <nav className="navbar">
             <a href="/">Home</a>
             <a>Pricing</a>
-            <a href="https://github.com/jakemoss127" target='_blank'>GitHub</a>
+            <a href="https://github.com/jakemoss127/Internshark" target='_blank'>GitHub</a>
             <a>News</a>
             <a href="/chart">Chart</a>
           </nav>
         </div>
         <div className="authentication-menu">
-          {!userName ? <a>Sign In</a> : <a>Welcome, {userName}</a>}
+          {!userName ? <a></a> : <a>Welcome, {userName}</a>}
           {!userName && <Auth />}
           {userName && <button className='sign-up'>Sign out</button>}
         </div>
