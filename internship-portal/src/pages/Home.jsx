@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Nav from '../components/Nav.jsx';
+import Footer from '../components/Footer.jsx';
 import { motion, useScroll } from 'framer-motion';
 import './Home.css';
 import heroImage from '../assets/hero-image.jpg';
@@ -25,7 +26,7 @@ function Home() {
             <button className='see-more'>
               View the List
             </button>
-            <a>Other News</a>
+            <a>About</a>
           </div>
         </motion.div>
         <div className='footer-image'>
@@ -47,6 +48,9 @@ function Home() {
           <img src={collegeSvg} alt="colleges" className='college-svg' />
       </motion.div>
       </motion.div>
+      <section className='footer'>
+        <Footer />
+      </section>
     </div>
   )
 }

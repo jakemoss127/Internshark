@@ -26,12 +26,12 @@ const Nav = () => {
             <a href="/">Home</a>
             <a href='/pricing'>Pricing</a>
             <a href="https://github.com/jakemoss127/Internshark" target='_blank'>GitHub</a>
-            <a>News</a>
+            <a>About</a>
             <a href="/chart">Chart</a>
           </nav>
         </div>
         <div className="authentication-menu">
-          {!user ? <a>Sign In</a> : <a>Welcome, {user.displayName}</a>}
+          {!user ? <a></a> : <a>Welcome, {user.displayName}</a>}
           {!user && <Auth />}
           {user && <button className='sign-up' onClick={logOut}>Sign out</button>}
         </div>
