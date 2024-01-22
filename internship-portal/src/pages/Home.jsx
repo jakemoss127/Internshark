@@ -20,7 +20,7 @@ function Home() {
             The Student-First Internship Portal
           </h1>
           <h2 className='subtitle'>
-            Internshark provides students with an upper-hand on applying to internship programs in the US.
+            Apply to internships faster in a portal designed for students.
           </h2>
           <div className="button-container">
             <button className='see-more'>

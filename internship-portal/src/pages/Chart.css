@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    background: rgb(0,7,79);
-    background: linear-gradient(0deg, rgb(0, 4, 52) 0%, rgba(0,0,0,1) 100%);
+    background-color: rgb(11, 11, 11);
     height: 100vh;
 }
 

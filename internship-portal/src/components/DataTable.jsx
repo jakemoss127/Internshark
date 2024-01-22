@@ -17,10 +17,10 @@ const DataTable = () => {
         };
 
         fetchData();
-    }, []); // Empty dependency array to run only on component mount
+        console.log('first');
+        }, []); // Empty dependency array to run only on component mount
 
     console.log(data);
-
     return (
         <div className='table-container'>
             <h1>Here is the table</h1>
