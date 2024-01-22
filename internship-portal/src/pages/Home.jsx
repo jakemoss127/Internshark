@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Nav from '../components/Nav.jsx';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import './Home.css';
 import heroImage from '../assets/hero-image.jpg';
 import collegeSvg from '../assets/colleges2.svg';
@@ -10,11 +10,13 @@ function Home() {
     <div className="Home">
       <div className='hero'>
         <div className="nav-container">
-          <Nav />
+          <header>
+            <Nav />
+          </header>
         </div>
-        <div className='title-container'>
+        <motion.div className='title-container'>
           <h1 className='title'>
-            The Premiere Internship Portal
+            The Student-First Internship Portal
           </h1>
           <h2 className='subtitle'>
             Internshark provides students with an upper-hand on applying to internship programs in the US.
@@ -25,7 +27,7 @@ function Home() {
             </button>
             <a>Other News</a>
           </div>
-        </div>
+        </motion.div>
         <div className='footer-image'>
           <img src={heroImage} alt="hero-image" />
         </div>
@@ -33,10 +35,6 @@ function Home() {
       <div className='features-section'>
         <h1 className='feature-title'>Our Features Transcend The Usual</h1>
         <div className='feature-row'>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
         </div>
       </div>
       <motion.div className='trusted-section'>

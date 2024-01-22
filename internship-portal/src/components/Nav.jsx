@@ -11,7 +11,8 @@ const Nav = () => {
   const {user, logOut} = UserAuth();
 
   return (
-    <motion.div className='nav-border'
+    <div className='nav'>
+      <motion.div className='nav-border'
       initial={{y: -100}}
       animate={{y: 0}}
       transition={{duration: 1, ease: 'easeInOut'}}
@@ -23,7 +24,7 @@ const Nav = () => {
         <div className="middle-menu">
           <nav className="navbar">
             <a href="/">Home</a>
-            <a>Pricing</a>
+            <a href='/pricing'>Pricing</a>
             <a href="https://github.com/jakemoss127/Internshark" target='_blank'>GitHub</a>
             <a>News</a>
             <a href="/chart">Chart</a>
@@ -34,7 +35,8 @@ const Nav = () => {
           {!user && <Auth />}
           {user && <button className='sign-up' onClick={logOut}>Sign out</button>}
         </div>
-    </motion.div>
+      </motion.div>
+    </div>
   )
 }
 
