@@ -27,8 +27,8 @@ const DataTable = () => {
         };
 
         fetchData();
-    }, []);
-
+        console.log('first');
+        }, []);
     return (
         <div className='table-container'>
             <h1>Job Listings</h1>
