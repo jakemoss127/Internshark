@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
 import { motion, useScroll } from 'framer-motion';
 import './Home.css';
 import heroImage from '../assets/hero-image.jpg';
 import collegeSvg from '../assets/colleges2.svg';
+import arrow from '../assets/arrow.svg';
+import ReactPlayer from 'react-player/youtube';
+
 
 function Home() {
   return (
@@ -20,22 +22,38 @@ function Home() {
             The Student-First Internship Portal
           </h1>
           <h2 className='subtitle'>
-            Apply to internships faster in a portal designed for students.
+            Internshark is a web application designed to help students consistently mass<br/>apply to internship programs around the United States. 
           </h2>
           <div className="button-container">
-            <button className='see-more'>
+            <a href='/chart'>
+              <button className='see-more'>
               View the List
-            </button>
-            <a>About</a>
+              </button></a>
+            <a href='/pricing'><button className='get-started'>Get Started</button></a>
+          </div>
+          <div className="free-row">
+            <div className="el1">
+            </div>
+            <div className="el2">
+              <p className='free'>Get started with a completely free plan on us. <a href='/pricing'><span className='under'>See our pricing →</span></a></p>
+            </div>
+            <div className="el3">
+              <div className="arrow-wrapper">
+                <p className='how-works'>
+                 How <span className='under'>Internshark</span> works
+                </p>
+                <img src={arrow} alt="arrow" className='arrow' style={{ maxWidth: '50px', maxHeight: '50px' }} />
+              </div>
+            </div>
           </div>
         </motion.div>
-        <div className='footer-image'>
-          <img src={heroImage} alt="hero-image" />
-        </div>
-      </div>
-      <div className='features-section'>
-        <h1 className='feature-title'>Our Features Transcend The Usual</h1>
-        <div className='feature-row'>
+        <div className='video-player'>
+          <ReactPlayer 
+            url='hhttps://www.youtube.com/watch?v=1uEJT3_M1Y0&ab_channel=ProkshLuthra'
+            controls={true}
+            width='100%'
+            height='100%'
+          />
         </div>
       </div>
       <motion.div className='trusted-section'>

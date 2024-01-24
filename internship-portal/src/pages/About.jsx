@@ -25,13 +25,13 @@ const About = () => {
                     <img src={Moss} className='team-img' alt='Moss' />
                     <h1 className='team-name'>Jacob Moss</h1>
                     <h2 className='team-role'>Co-Founder and Software Engineer</h2>
-                    <p className='person-description'>Jacob is a Junior Computer Science student <br/>at The University of Florida. He has experience working in React, JS, HTML, & CSS and loves creative development. Jacob also has industry experience as a SWE intern at Humana</p>
+                    <p className='person-description'>Jacob is a Junior Computer Science student <br/>at The University of Florida. Jacob has industry experience in web development<br/>as a SWE intern at Humana</p>
                 </div>
                 <div className='team-card'>
                 <img src={Behar} className='team-img' alt='Moss' />
                     <h1 className='team-name'>Seth Behar</h1>
                     <h2 className='team-role'>Co-Founder and Software Engineer</h2>
-                    <p className='person-description'>Seth is also a Junior Computer Science student <br/>at The University of Florida. He has experience working in SQL, MongoDB, as well as a previous internship as a SWE at eBacon</p>
+                    <p className='person-description'>Seth is a Junior Computer Science student <br/>at The University of Florida. He has industry experience working in SQL as<br/> a SWE intern at eBacon</p>
                 </div>
             </div>
         </div>
