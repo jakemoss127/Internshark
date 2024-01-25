@@ -10,7 +10,7 @@ const DataTable = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
             const json = await response.json();
-            setData(json); // Set the fetched data to the state
+            setData(json); 
             setJobs(json.map(job => ({
                 employer_name: job.employer_name,
                 employer_website: job.employer_website || 'N/A', // Default to 'N/A' if not available
@@ -38,6 +38,7 @@ const DataTable = () => {
                     <div key={index}>
                         <h3>{job.job_title}</h3>
                         <p>{job.employer_name}</p>
+                        <a href={job.job_apply_link}>LINK TO INTERNSHIP for {job.employer_name}</a>
                         
                     </div>
                 ))}
