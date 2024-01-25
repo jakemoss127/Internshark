@@ -60,6 +60,18 @@ app.post('/add-jobs', async (req, res) => {
     }
 });
 
+app.get('/software-engineering-jobs', async(req, res) => {
+    try {
+        const softwareJobs = await pool.query(
+          `SELECT * FROM "Software Engineering" LIMIT 10;`,
+        )
+        res.json(softwareJobs.rows)
+      } catch (error) {
+        console.error(error)
+        res.status(500).send('Server error')
+      }
+})
+
 app.listen(process.env.APP_PORT, () => {
     console.log('Server running on port ,', process.env.APP_PORT);
 });
