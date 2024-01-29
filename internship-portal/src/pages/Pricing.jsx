@@ -23,9 +23,31 @@ const Pricing = () => {
                 features={[
                     'Search for internships',
                     'Save internships',
+                    'Apply to internships'
+                ]}
+                color='#FFFFFF50'/>
+                <PriceCard 
+                title='Pro'
+                price='$10'
+                description='Free Version'
+                features={[
+                    'Search for internships',
+                    'Save internships',
                     'Apply to internships',
                     'Access to Internshark resources'
-                ]}/>
+                ]}
+                color='#327ee2'/>
+                <PriceCard 
+                title='Gold'
+                price='$15'
+                description='Free Version'
+                features={[
+                    'Search for internships',
+                    'Save internships',
+                    'Apply to internships',
+                    'Access to Internshark resources'
+                ]}
+                color='#d4af37'/>
             </div>
         </div>
     </div>

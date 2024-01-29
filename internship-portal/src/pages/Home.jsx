@@ -47,14 +47,18 @@ function Home() {
             </div>
           </div>
         </motion.div>
-        <div className='video-player'>
+        <motion.div className='video-player'
+          initial={{y: 400}}
+          animate={{y: 0}}
+          transition={{duration: 1, ease: 'easeInOut'}}
+        >
           <ReactPlayer 
             url='hhttps://www.youtube.com/watch?v=1uEJT3_M1Y0&ab_channel=ProkshLuthra'
             controls={true}
             width='100%'
             height='100%'
           />
-        </div>
+        </motion.div>
       </div>
       <motion.div className='trusted-section'>
         <h1 className='trusted-title'>Trusted by students at</h1>
