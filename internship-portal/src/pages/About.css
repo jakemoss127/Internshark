@@ -15,6 +15,7 @@
     align-items: center;
     margin-top: 8rem;
     color: white;
+    max-width: 100%;
 }
 
 .content-row {
@@ -97,4 +98,27 @@
     color: #cdcdcd;
     margin-top: 0.5rem;
     text-align: center;
+}
+
+@media (max-width: 842px) {
+    .team-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .about-container {
+        height: 155vh;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column; 
+        text-align: center; 
+    }
+
+    .description-title {
+        color: white;
+        font-size: 1.8rem;
+    }
 }
