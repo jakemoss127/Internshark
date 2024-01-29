@@ -1,4 +1,13 @@
+import './Columns.css'
+
 const COLUMNS = [
+    {
+        Header: '',
+        accessor: 'employer_logo',
+        Cell: ({ value }) => (
+            <img src={value} alt="" rel="noopener noreferrer" className="table-image" />
+          ),
+    },
     {
         Header: 'Company',
         accessor: 'employer_name',
