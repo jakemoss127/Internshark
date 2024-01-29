@@ -1,54 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './DataTable.css';
-import fetchedData from '../assets/fetchedData.json'
+import { useTable } from 'react-table';
+import COLUMNS from './Columns.jsx';
 
 const DataTable = () => {
-    const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
-    const fetchSoftwareInternships = async() => {
-        try {
+  const fetchSoftwareInternships = async () => {
+    try {
+      // FECTHING FROM THE BACKEND...
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
+      const json = await response.json();
 
-            // FECTHING FROM THE BACKEND...
-            // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
-            // const json = await response.json();
-
-            // FETCHING FROM DUMMY DATA...
-            const json = fetchedData;
-
-            setJobs(json.data.map(job => ({
-                employer_name: job.employer_name,
-                employer_website: job.employer_website || 'N/A', // Default to 'N/A' if not available
-                job_title: job.job_title,
-                job_apply_link: job.job_apply_link,
-                employer_logo: job.employer_logo || 'N/A', // Default to 'N/A' if not available
-                job_is_remote: job.job_is_remote || false, // Default to false if not specified
-                job_city: job.job_city || 'N/A', 
-                job_state: job.job_state || 'N/A'
-            })));
-        } catch (error) {
-            console.error("Failed to fetch data:", error);
-        }
+      setJobs(
+        json.data.map((job) => ({
+          employer_name: job.employer_name,
+          employer_website: job.employer_website || 'N/A',
+          job_title: job.job_title,
+          job_apply_link: job.job_apply_link,
+          employer_logo: job.employer_logo || 'N/A',
+          job_is_remote: job.job_is_remote || false,
+          job_city: job.job_city || 'N/A',
+          job_state: job.job_state || 'N/A',
+        }))
+      );
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
     }
+  };
 
-    useEffect(() => {
-        fetchSoftwareInternships();
-    }, []);
+  useEffect(() => {
+    fetchSoftwareInternships();
+  }, []);
 
-    return (
-        <div className='table-container'>
-            <h1>Job Listings</h1>
-            <div style={{ color: 'white' }}>
-                {jobs.map((job, index) => (
-                    <div key={index}>
-                        <h3>{job.job_title}</h3>
-                        <p>{job.employer_name}</p>
-                        <a href={job.job_apply_link}>LINK TO INTERNSHIP for {job.employer_name}</a>
-                        
-                    </div>
+  const columns = useMemo(() => COLUMNS, []);
+  const tableInstance = useTable({ columns, data: jobs });
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+
+  return (
+    <div className="table-container">
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}
-            </div>
-        </div>
-    );
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default DataTable;

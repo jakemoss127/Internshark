@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    background-color: rgb(11, 11, 11);
-    height: 100vh;
+    background-color: #151719;
 }
 
 .chart-title {
