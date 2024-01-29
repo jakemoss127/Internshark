@@ -42,3 +42,10 @@
     flex-direction: row;
     margin-top: 2rem;
 }
+
+@media (max-width: 1001px) {
+    .card-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
