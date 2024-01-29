@@ -9,11 +9,11 @@ const DataTable = () => {
   const fetchSoftwareInternships = async () => {
     try {
       // FECTHING FROM THE BACKEND...
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`);
       const json = await response.json();
 
       setJobs(
-        json.data.map((job) => ({
+        json.map((job) => ({
           employer_name: job.employer_name,
           employer_website: job.employer_website || 'N/A',
           job_title: job.job_title,
@@ -22,6 +22,7 @@ const DataTable = () => {
           job_is_remote: job.job_is_remote || false,
           job_city: job.job_city || 'N/A',
           job_state: job.job_state || 'N/A',
+          job_posted_at_datetime_utc: job.job_posted_at_datetime_utc || 'N/A',
         }))
       );
     } catch (error) {

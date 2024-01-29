@@ -25,8 +25,8 @@ const COLUMNS = [
           ),
     },
     {   
-        Header: 'Remote',
-        accessor: 'job_is_remote',
+        Header: 'Date Posted',
+        accessor: 'job_posted_at_datetime_utc',
     },
 ];
 
