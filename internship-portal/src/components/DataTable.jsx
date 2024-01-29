@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './DataTable.css';
+import fetchedData from '../assets/fetchedData.json'
 
 const DataTable = () => {
-    const [data, setData] = useState([]);
     const [jobs, setJobs] = useState([]);
 
-    // Fetch data from backend
     const fetchSoftwareInternships = async() => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
-            const json = await response.json();
-            setData(json); 
-            setJobs(json.map(job => ({
+
+            // FECTHING FROM THE BACKEND...
+            // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/software-engineering-jobs`);
+            // const json = await response.json();
+
+            // FETCHING FROM DUMMY DATA...
+            const json = fetchedData;
+
+            setJobs(json.data.map(job => ({
                 employer_name: job.employer_name,
                 employer_website: job.employer_website || 'N/A', // Default to 'N/A' if not available
                 job_title: job.job_title,
