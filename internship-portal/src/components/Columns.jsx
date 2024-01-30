@@ -1,13 +1,13 @@
 import './Columns.css'
 
 const COLUMNS = [
-    {
-        Header: '',
-        accessor: 'employer_logo',
-        Cell: ({ value }) => (
-            <img src={value} alt="" rel="noopener noreferrer" className="table-image" />
-          ),
-    },
+    // {
+    //     Header: '',
+    //     accessor: 'employer_logo',
+    //     Cell: ({ value }) => (
+    //         <img src={value} alt="" rel="noopener noreferrer" className="table-image" />
+    //       ),
+    // },
     {
         Header: 'Company',
         accessor: 'employer_name',
@@ -15,6 +15,13 @@ const COLUMNS = [
     {
         Header: 'Job Title',
         accessor: 'job_title',
+        Cell : ({value}) => (
+            <p>
+            {
+                value.length > 60 ? value.substring(0, 60) + '...' : value
+            }
+            </p>
+          ),
     },
     {
         Header: 'City',
@@ -36,6 +43,11 @@ const COLUMNS = [
     {   
         Header: 'Date Posted',
         accessor: 'job_posted_at_datetime_utc',
+        Cell: ({value}) => (
+            <p>
+              {new Date(value).toLocaleDateString()}
+            </p>
+          ),
     },
 ];
 

@@ -73,7 +73,7 @@ app.post('/add-jobs', async (req, res) => {
 app.get('/software-engineering-jobs', async (req, res) => {
     try {
         const softwareJobs = await pool.query(
-            `SELECT * FROM "Software Engineering" ORDER BY job_posted_at_datetime_utc DESC`,
+            `SELECT * FROM "Software Engineering" WHERE job_posted_at_datetime_utc IS NOT NULL ORDER BY job_posted_at_datetime_utc DESC`,
         )
         res.json(softwareJobs.rows)
     } catch (error) {
