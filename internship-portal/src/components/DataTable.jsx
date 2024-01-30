@@ -3,6 +3,7 @@ import './DataTable.css';
 import { useTable } from 'react-table';
 import COLUMNS from './Columns.jsx';
 
+
 const DataTable = () => {
   const [jobs, setJobs] = useState([]);
 
@@ -20,9 +21,9 @@ const DataTable = () => {
           job_apply_link: job.job_apply_link,
           employer_logo: job.employer_logo || 'N/A',
           job_is_remote: job.job_is_remote || false,
-          job_city: job.job_city || 'N/A',
-          job_state: job.job_state || 'N/A',
-          job_posted_at_datetime_utc: job.job_posted_at_datetime_utc || 'N/A',
+          job_city: job.job_city || '',
+          job_state: job.job_state || 'USA',
+          job_posted_at_datetime_utc: job.job_posted_at_datetime_utc || '1/1/2000',
         }))
       );
     } catch (error) {

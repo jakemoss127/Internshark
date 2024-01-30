@@ -1,25 +1,33 @@
 .table-container {
     margin-top: 4rem;
     min-height: 100vh;
-    
 
 table {
     font-family: 'Inter', sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    max-width: 100%;
     color: #ededed;
 }
 thead {
-    background-color: #312d2d;
+    background-color: #195CB6;
+    font-size: 1.4rem;
 }
 td,
 th {
     border: 1px solid #555050;
     text-align: left;
-    padding: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 tr:nth-child(even) {
-    background-color: #312d2d;
+    background-color: #195db683;
+}
+tr:nth-child(even) a{
+    color: #bcbcbc;
+    font-weight: bold;
+    text-decoration: underline;
 }
 a{
     color: #195CB6;
