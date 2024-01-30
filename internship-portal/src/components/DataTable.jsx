@@ -66,20 +66,19 @@ const DataTable = () => {
   };
 
   return (
-    <div className="table-container">
+    <div className="all-content">
       <div className='button-container'>
         <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
         <button onClick={() => setActiveChart('business')}>Business Admin</button>
         <button onClick={() => setActiveChart('econ')}>Economics</button>
         <button onClick={() => setActiveChart('finance')}>Finance</button>
-
       </div>
-
-      {activeChart === 'software' && renderTable(softwareTableInstance)}
-      {activeChart === 'business' && renderTable(businessTableInstance)}
-      {activeChart === 'econ' && renderTable(econTableInstance)}
-      {activeChart === 'finance' && renderTable(financeTableInstance)}
-
+      <div className="table-container">
+        {activeChart === 'software' && renderTable(softwareTableInstance)}
+        {activeChart === 'business' && renderTable(businessTableInstance)}
+        {activeChart === 'econ' && renderTable(econTableInstance)}
+        {activeChart === 'finance' && renderTable(financeTableInstance)}
+      </div>
     </div>
   );
 };

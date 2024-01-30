@@ -11,6 +11,13 @@ const COLUMNS = [
     {
         Header: 'Company',
         accessor: 'employer_name',
+        Cell : ({value}) => (<p
+        style={{fontWeight: '800'}}>
+            {
+                value.length > 60 ? value.substring(0, 60) + '...' : value
+            }
+        </p>
+        ),
     },
     {
         Header: 'Job Title',
