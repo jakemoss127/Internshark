@@ -3,61 +3,53 @@ import './DataTable.css';
 import { useTable } from 'react-table';
 import COLUMNS from './Columns.jsx';
 
-
 const DataTable = () => {
   const [jobs, setJobs] = useState([]);
+  const [businessData, setBusinessData] = useState([]);
+  const [econData, setEconData] = useState([]);
+  const [activeChart, setActiveChart] = useState('software');
 
-  const fetchSoftwareInternships = async () => {
+  const fetchData = async (url, setState) => {
     try {
-      // FECTHING FROM THE BACKEND...
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`);
+      const response = await fetch(url);
       const json = await response.json();
-
-      setJobs(
-        json.map((job) => ({
-          employer_name: job.employer_name,
-          employer_website: job.employer_website || 'N/A',
-          job_title: job.job_title,
-          job_apply_link: job.job_apply_link,
-          employer_logo: job.employer_logo || 'N/A',
-          job_is_remote: job.job_is_remote || false,
-          job_city: job.job_city || '',
-          job_state: job.job_state || 'USA',
-          job_posted_at_datetime_utc: job.job_posted_at_datetime_utc || '1/1/2000',
-        }))
-      );
+      setState(json);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     }
   };
 
   useEffect(() => {
-    fetchSoftwareInternships();
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`, setJobs);
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}business-jobs`, setBusinessData);
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}econ-jobs`, setEconData);
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  const tableInstance = useTable({ columns, data: jobs });
+  const jobsTableInstance = useTable({ columns, data: jobs });
+  const businessTableInstance = useTable({ columns, data: businessData });
+  const econTableInstance = useTable({ columns, data: econData });
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const renderTable = (tableInstance) => {
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
-  return (
-    <div className="table-container">
+    return (
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup) => (
+          {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
+              {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {rows.map(row => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
+                {row.cells.map(cell => (
                   <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}
               </tr>
@@ -65,6 +57,20 @@ const DataTable = () => {
           })}
         </tbody>
       </table>
+    );
+  };
+
+  return (
+    <div className="table-container">
+      <div className='button-container'>
+        <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
+        <button onClick={() => setActiveChart('business')}>Business Admin</button>
+        <button onClick={() => setActiveChart('econ')}>Economics</button>
+      </div>
+
+      {activeChart === 'software' && renderTable(jobsTableInstance)}
+      {activeChart === 'business' && renderTable(businessTableInstance)}
+      {activeChart === 'econ' && renderTable(econTableInstance)}
     </div>
   );
 };

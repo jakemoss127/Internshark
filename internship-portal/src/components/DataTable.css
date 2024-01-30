@@ -35,3 +35,24 @@ a{
     text-decoration: underline;
 }
 }
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    padding-bottom: 4rem;
+}
+button {
+    background: #195CB6;
+    border-radius: 0.625rem;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button {
+  scale: 1.07;
+  transition: 0.3s;
+}
