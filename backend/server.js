@@ -154,6 +154,21 @@ app.get('/econ-jobs', async (req, res) => {
     }
 })
 
+app.get('/total-jobs', async (req, res) => {
+    try {
+        const total = await pool.query(
+            `SELECT 
+                (SELECT COUNT(*) FROM "Software Engineering") +
+                (SELECT COUNT(*) FROM "Business") +
+                (SELECT COUNT(*) FROM "Econ") AS TotalJobs`
+        );
+        res.json(total.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Server running on port ,', process.env.APP_PORT);

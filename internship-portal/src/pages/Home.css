@@ -198,3 +198,9 @@
     border-radius: 20px;
     overflow: hidden;
   }
+
+  .total-internships {
+    color:#ffffff;
+    font-family: 'Inter', sans-serif;
+    padding: 1rem;
+  }

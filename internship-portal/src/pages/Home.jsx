@@ -6,9 +6,28 @@ import heroImage from '../assets/hero-image.jpg';
 import collegeSvg from '../assets/colleges2.svg';
 import arrow from '../assets/arrow.svg';
 import ReactPlayer from 'react-player/youtube';
+import { useState, useEffect } from 'react';
 
 
 function Home() {
+
+  const [totalInternships, setTotalInternships] = useState()
+
+  const fetchTotal = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}total-jobs`);
+      const json = await response.json();
+      setTotalInternships(json.totaljobs); 
+      console.log(json)
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTotal();
+  }, []);
+
   return (
     <div className="Home">
       <div className='hero'>
@@ -21,9 +40,10 @@ function Home() {
           <h1 className='title'>
             The Student-First Internship Portal
           </h1>
-          <h2 className='subtitle'>
+          <h2 className='total-internships'>Explore our <span style={{color: '#195CB6', fontSize: '1.7rem'}}>{totalInternships}</span> internships</h2>
+          <h3 className='subtitle'>
             Internshark is a web application designed to help students consistently mass<br/>apply to internship programs around the United States. 
-          </h2>
+          </h3>
           <div className="button-container">
             <a href='/chart'>
               <button className='see-more'>
