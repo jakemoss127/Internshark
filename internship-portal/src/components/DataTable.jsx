@@ -4,9 +4,11 @@ import { useTable } from 'react-table';
 import COLUMNS from './Columns.jsx';
 
 const DataTable = () => {
-  const [jobs, setJobs] = useState([]);
+  const [softwareJobs, setSoftwareJobs] = useState([]);
   const [businessData, setBusinessData] = useState([]);
   const [econData, setEconData] = useState([]);
+  const [financeData, setFinanceData] = useState([]);
+
   const [activeChart, setActiveChart] = useState('software');
 
   const fetchData = async (url, setState) => {
@@ -20,15 +22,18 @@ const DataTable = () => {
   };
 
   useEffect(() => {
-    fetchData(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`, setJobs);
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`, setSoftwareJobs);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}business-jobs`, setBusinessData);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}econ-jobs`, setEconData);
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}finance-jobs`, setFinanceData);
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  const jobsTableInstance = useTable({ columns, data: jobs });
+  const softwareTableInstance = useTable({ columns, data: softwareJobs });
   const businessTableInstance = useTable({ columns, data: businessData });
   const econTableInstance = useTable({ columns, data: econData });
+  const financeTableInstance = useTable({ columns, data: financeData });
+
 
   const renderTable = (tableInstance) => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
@@ -66,11 +71,15 @@ const DataTable = () => {
         <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
         <button onClick={() => setActiveChart('business')}>Business Admin</button>
         <button onClick={() => setActiveChart('econ')}>Economics</button>
+        <button onClick={() => setActiveChart('finance')}>Finance</button>
+
       </div>
 
-      {activeChart === 'software' && renderTable(jobsTableInstance)}
+      {activeChart === 'software' && renderTable(softwareTableInstance)}
       {activeChart === 'business' && renderTable(businessTableInstance)}
       {activeChart === 'econ' && renderTable(econTableInstance)}
+      {activeChart === 'finance' && renderTable(financeTableInstance)}
+
     </div>
   );
 };
