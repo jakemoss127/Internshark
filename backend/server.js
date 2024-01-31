@@ -35,26 +35,40 @@ const options = {
     }
 };
 
-// STRIPE CHECKOUT
-app.post('/create-checkout-session', async (req, res) => {
+// STRIPE CHECKOUT PRO
+app.post('/create-checkout-session-pro', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
+            mode: 'subscription',
             payment_method_types: ['card'],
             line_items: [{
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: 'Gold Membership',
-                    },
-                    unit_amount: 2000, // amount in cents
-                },
+                price: process.env.STRIPE_PRO_API_ID,
                 quantity: 1,
             }],
-            mode: 'payment',
             success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/payment-cancelled`,
         });
 
+        res.json({ url: session.url });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+// STRIPE CHECKOUT GOLD
+app.post('/create-checkout-session-gold', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            mode: 'subscription',
+            payment_method_types: ['card'],
+            line_items: [{
+                price: process.env.STRIPE_GOLD_API_ID,
+                quantity: 1,
+            }],
+            success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${req.headers.origin}/payment-cancelled`,
+        });
         res.json({ url: session.url });
     } catch (err) {
         res.status(500).json({ error: err.message });

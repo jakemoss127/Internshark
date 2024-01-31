@@ -28,6 +28,7 @@ const Pricing = () => {
                 color='#FFFFFF50'/>
                 <PriceCard 
                 title='Pro'
+                type="pro"
                 price='$10'
                 description='Free Version'
                 features={[
@@ -39,6 +40,7 @@ const Pricing = () => {
                 color='#327ee2'/>
                 <PriceCard 
                 title='Gold'
+                type="gold"
                 price='$15'
                 description='Free Version'
                 features={[

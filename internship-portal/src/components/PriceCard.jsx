@@ -3,11 +3,18 @@ import './PriceCard.css';
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 const PriceCard = (props) => {
-    const { title, price, description, features, color } = props
+    const { title, price, description, features, color, type } = props;
 
     const handleCheckout = async () => {
+        let endpoint = '';
+        if (type === 'pro') {
+            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-pro`;
+        } else if (type === 'gold') {
+            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-gold`;
+        }
+
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}create-checkout-session`, { method: 'POST' });
+            const response = await fetch(endpoint, { method: 'POST' });
             const session = await response.json();
             window.location.href = session.url;
         } catch (error) {
@@ -31,7 +38,7 @@ const PriceCard = (props) => {
                 <ul>
                     {features.map((feature, key) => {
                         return <li key={key}>
-                            
+
                             <IoCheckmarkCircleOutline className='white-icon' />
                             <span>{feature}</span>
                         </li>
