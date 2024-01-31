@@ -6,6 +6,8 @@ const app = express();
 const axios = require('axios');
 require('dotenv').config();
 
+const stripe = require('stripe')(process.env.STRIPE_API_SECRET_KEY);
+
 const pool = new Pool({
     user: process.env.USER,
     host: process.env.HOST,
@@ -32,6 +34,33 @@ const options = {
         'X-RapidAPI-Host': process.env.X_RAPID_HOST,
     }
 };
+
+// STRIPE CHECKOUT
+app.post('/create-checkout-session', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: 'Gold Membership',
+                    },
+                    unit_amount: 2000, // amount in cents
+                },
+                quantity: 1,
+            }],
+            mode: 'payment',
+            success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${req.headers.origin}/payment-cancelled`,
+        });
+
+        res.json({ url: session.url });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 const fetchData = async () => {
     try {
