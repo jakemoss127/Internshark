@@ -203,4 +203,42 @@
     color:#ffffff;
     font-family: 'Inter', sans-serif;
     padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .internship-number {
+    color: #195CB6;
+    font-size: 1.7em;
+  }
+
+  @media (max-width: 700px) {
+    .title {
+      font-size: 1.2rem;
+    }
+
+    .total-internships {
+      font-size: 1.1rem;
+    }
+
+    .internship-number {
+      font-size: 1.1rem;
+      color: #195CB6;
+    }
+
+    .hero .subtitle {
+      font-size: .7rem;
+    }
+
+    .button-container button {
+      scale: .9;
+    }
+
+    .college-svg {
+      scale: .5;
+    }
+
+    .trusted-title {
+      margin-bottom: -2rem;
+      margin-top: 3rem;
+    }
   }

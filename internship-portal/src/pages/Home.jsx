@@ -40,7 +40,7 @@ function Home() {
           <h1 className='title'>
             The Student-First Internship Portal
           </h1>
-          <h2 className='total-internships'>Explore our <span style={{color: '#195CB6', fontSize: '1.7rem'}}>{totalInternships}</span> internships</h2>
+          <h2 className='total-internships'>Explore our <span className='internship-number'>{totalInternships}</span> internships</h2>
           <h3 className='subtitle'>
             Internshark is a web application designed to help students consistently mass<br/>apply to internship programs around the United States. 
           </h3>
