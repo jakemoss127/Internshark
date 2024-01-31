@@ -3,6 +3,9 @@ import './About.css';
 import Nav from '../components/Nav.jsx';
 import Moss from '../assets/moss.png';
 import Behar from '../assets/seth.jpg';
+import { FaLinkedin } from "react-icons/fa";
+import { color } from 'framer-motion';
+
 
 const About = () => {
   return (
@@ -11,7 +14,7 @@ const About = () => {
         <div className='content'>
             <div className='content-row'>
                 <h1 className='description-title'>
-                    For Students, By Students.
+                    For <span style={{color: '#327ee2', fontWeight: '600'}}>Students</span>, By <span style={{color: '#327ee2', fontWeight: '600'}}>Students</span>.
                 </h1>
                 <p className='description'>Internshark is a web application designed to help students apply to internship programs.<br/>
                 Our state of the art chart technology is a one stop shop for students to mass apply<br/>
@@ -19,19 +22,22 @@ const About = () => {
             </div>
         </div>
         <div className='team-container'>
-            <h1 className='team-title'>Meet our team</h1>
+            <h1 className='team-title'>Meet The <span style={{
+                color: '#327ee2',
+                fontWeight: '600'
+            }}>Team</span></h1>
             <div className="team-row">
                 <div className='team-card'>
                     <img src={Moss} className='team-img' alt='Moss' />
                     <h1 className='team-name'>Jacob Moss</h1>
                     <h2 className='team-role'>Co-Founder</h2>
-                    <p className='person-description'>Jacob is a Junior Computer Science student <br/>at The University of Florida. Jacob has industry experience in web development<br/>as a SWE intern at Humana</p>
+                    <div className="icon-row"><FaLinkedin className='white-icon'/></div>
                 </div>
                 <div className='team-card'>
                 <img src={Behar} className='team-img' alt='Moss' />
                     <h1 className='team-name'>Seth Behar</h1>
                     <h2 className='team-role'>Co-Founder</h2>
-                    <p className='person-description'>Seth is a Junior Computer Science student <br/>at The University of Florida. He has industry experience working in SQL as<br/> a SWE intern at eBacon</p>
+                    <div className="icon-row"><FaLinkedin className='white-icon'/></div>
                 </div>
             </div>
         </div>
