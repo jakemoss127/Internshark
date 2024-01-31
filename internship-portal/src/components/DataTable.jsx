@@ -8,6 +8,8 @@ const DataTable = () => {
   const [businessData, setBusinessData] = useState([]);
   const [econData, setEconData] = useState([]);
   const [financeData, setFinanceData] = useState([]);
+  const [marketingData, setMarketingData] = useState([]);
+
 
   const [activeChart, setActiveChart] = useState('software');
 
@@ -26,6 +28,8 @@ const DataTable = () => {
     fetchData(`${import.meta.env.VITE_BACKEND_URL}business-jobs`, setBusinessData);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}econ-jobs`, setEconData);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}finance-jobs`, setFinanceData);
+    fetchData(`${import.meta.env.VITE_BACKEND_URL}marketing-jobs`, setMarketingData);
+
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
@@ -33,6 +37,8 @@ const DataTable = () => {
   const businessTableInstance = useTable({ columns, data: businessData });
   const econTableInstance = useTable({ columns, data: econData });
   const financeTableInstance = useTable({ columns, data: financeData });
+  const marketingTableInstance = useTable({ columns, data: marketingData });
+
 
 
   const renderTable = (tableInstance) => {
@@ -72,12 +78,16 @@ const DataTable = () => {
         <button onClick={() => setActiveChart('business')}>Business Admin</button>
         <button onClick={() => setActiveChart('econ')}>Economics</button>
         <button onClick={() => setActiveChart('finance')}>Finance</button>
+        <button onClick={() => setActiveChart('marketing')}>Marketing</button>
+
       </div>
       <div className="table-container">
         {activeChart === 'software' && renderTable(softwareTableInstance)}
         {activeChart === 'business' && renderTable(businessTableInstance)}
         {activeChart === 'econ' && renderTable(econTableInstance)}
         {activeChart === 'finance' && renderTable(financeTableInstance)}
+        {activeChart === 'marketing' && renderTable(marketingTableInstance)}
+
       </div>
     </div>
   );
