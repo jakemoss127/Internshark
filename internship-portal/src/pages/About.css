@@ -62,8 +62,8 @@
 
 .team-card {
     background-color: aliceblue;
-    height:30rem;
-    width: 25rem;
+    height: 28rem;
+    width: 20rem;
     margin: 1rem;
     border-radius: 10px;
     background-color: #ffffff1d;
@@ -72,12 +72,13 @@
     align-items: center;
     color: #d1d1d1;
     justify-content: space-between;
+    border: 1px solid #327ee2;
 }
 
 .team-img {
     margin-top: 1.2rem;
-    height: 15rem;
-    width: 15rem;
+    height: 10rem;
+    width: 10rem;
     border-radius: 50%;
     filter: grayscale(100%);
     margin-bottom: 1rem;

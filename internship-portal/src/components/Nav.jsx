@@ -5,6 +5,7 @@ import './Nav.css';
 import internlogo from '../assets/internshark.svg';
 import Auth from '../pages/Auth';
 import { UserAuth } from '../context/AuthContext';
+import { CgProfile } from "react-icons/cg";
 
 const Nav = () => {
 
@@ -31,7 +32,9 @@ const Nav = () => {
           </nav>
         </div>
         <div className="authentication-menu">
-          {!user ? <a></a> : <a>Welcome, {user.displayName}</a>}
+          {!user ? <a></a> : <a style={{
+            display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'
+          }}><CgProfile style={{marginRight: '0.5rem', color: 'white', minHeight: '20px', minWidth: '20px'}}/>{user.displayName}</a>}
           {!user && <Auth />}
           {user && <button className='sign-up' onClick={logOut}>Sign out</button>}
         </div>

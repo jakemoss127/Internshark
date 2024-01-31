@@ -18,34 +18,33 @@ const Pricing = () => {
             <div className='card-row'>
                 <PriceCard 
                 title='Free'
-                price='$0'
+                price='$0.00'
                 description='Free Version'
                 features={[
-                    'Search for internships',
-                    'Save internships',
-                    'Apply to internships'
+                    'View 5 most recent internships',
+                    'Apply to internships',
                 ]}
                 color='#FFFFFF50'/>
                 <PriceCard 
                 title='Pro'
-                price='$10'
-                description='Free Version'
+                price='$7.99'
+                description='Paid Version'
                 features={[
-                    'Search for internships',
-                    'Save internships',
+                    'View all internship listings',
+                    'Track internship applications',
                     'Apply to internships',
-                    'Access to Internshark resources'
+                    'Access to one major table'
                 ]}
                 color='#327ee2'/>
                 <PriceCard 
                 title='Gold'
-                price='$15'
+                price='$11.99'
                 description='Free Version'
                 features={[
-                    'Search for internships',
-                    'Save internships',
+                    'View all internship listings',
+                    'Track internship applications',
                     'Apply to internships',
-                    'Access to Internshark resources'
+                    'Access to all major tables'
                 ]}
                 color='#d4af37'/>
             </div>
