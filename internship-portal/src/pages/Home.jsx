@@ -7,7 +7,12 @@ import collegeSvg from '../assets/colleges2.svg';
 import arrow from '../assets/arrow.svg';
 import ReactPlayer from 'react-player/youtube';
 import { useState, useEffect } from 'react';
-
+import { ImSearch } from "react-icons/im";
+import { ImEnter } from "react-icons/im";
+import { ImClipboard } from "react-icons/im";
+import { ImBooks } from "react-icons/im";
+import { ImCoinDollar } from "react-icons/im";
+import { ImSphere } from "react-icons/im";
 
 function Home() {
 
@@ -94,6 +99,44 @@ function Home() {
           <img src={collegeSvg} alt="colleges" className='college-svg' />
       </motion.div>
       </motion.div>
+      <div className="feature-section">
+        <h1 className="our-features">Our Features</h1>
+        <p className="sub-features">
+          Internshark's powerful features help students find internships faster and more efficiently.<br/>From mass applying to tracking applications, we've got you covered.
+        </p>
+        <div className="feature-grid">
+          <div className="card">
+            <ImEnter className='card-icon'/>
+            <h1 className="card-title">Mass Apply</h1>
+            <p className="card-description">Internshark houses all internship listings in one central chart, making it extremely time effective to mass apply using our services. Mass applying can increase the odds of landing a dream position.</p>
+          </div>
+          <div className="card">
+            <ImClipboard className='card-icon'/>
+            <h1 className="card-title">Track Your Progress</h1>
+            <p className="card-description">Our in house chart feature allows you to track your progress. Users can see how many internships they have applied for, and also ensure that multiple applications don't go to the same company.</p>
+          </div>
+          <div className="card">
+            <ImBooks className='card-icon'/>
+            <h1 className="card-title">Explore Diverse Fields</h1>
+            <p className="card-description">Internshark allows you to broaden your horizons by effortlessly viewing internship opportunities across multiple majors. Discover and apply for positions in various fields to align with your career aspirations.</p>
+          </div>
+          <div className="card">
+              <ImSphere className='card-icon'/>
+              <h1 className="card-title">Discover Top Companies</h1>
+              <p className="card-description">Uncover the most sought-after internship opportunities with our Top Companies feature. Gain access to a curated list of prestigious organizations that can elevate your professional experience and help shape your future career.</p>
+            </div>
+          <div className="card">
+              <ImSearch className='card-icon'/>
+              <h1 className="card-title">Refine Your Search</h1>
+              <p className="card-description">Use our Advanced Filtering options to tailor your internship search precisely. Narrow down your choices based on criteria such as location, industry, and job type, ensuring you find opportunities that best match your preferences.</p>
+          </div>
+          <div className="card">
+              <ImCoinDollar className='card-icon'/>
+              <h1 className="card-title">Budget-Friendly Options</h1>
+              <p className="card-description">Internshark offers affordable pricing plans, ensuring that access to valuable internship opportunities doesn't break the bank. Invest in your future without compromising your budget, and a step towards a successful career.</p>
+          </div>
+          </div>
+      </div>
       <section className='footer'>
         <Footer />
       </section>
