@@ -7,7 +7,7 @@ import Auth from '../pages/Auth';
 import { UserAuth } from '../context/AuthContext';
 import { CgProfile } from "react-icons/cg";
 
-const Nav = () => {
+const Nav = () => { 
 
   const {user, logOut} = UserAuth();
 

@@ -55,3 +55,12 @@ button {
   scale: 1.07;
   transition: 0.3s;
 }
+
+div .sign-in-popup {
+    color: #195CB6; 
+    margin-top: 4rem;
+    font-size: 3rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+
+}

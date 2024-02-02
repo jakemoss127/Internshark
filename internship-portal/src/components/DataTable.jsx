@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { UserAuth } from '../context/AuthContext';
 import './DataTable.css';
 import { useTable } from 'react-table';
 import COLUMNS from './Columns.jsx';
 
 const DataTable = () => {
+
+  const { user } = UserAuth();
+
   const [softwareJobs, setSoftwareJobs] = useState([]);
   const [businessData, setBusinessData] = useState([]);
   const [econData, setEconData] = useState([]);
@@ -24,6 +28,7 @@ const DataTable = () => {
   };
 
   useEffect(() => {
+
     fetchData(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`, setSoftwareJobs);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}business-jobs`, setBusinessData);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}econ-jobs`, setEconData);
@@ -73,22 +78,26 @@ const DataTable = () => {
 
   return (
     <div className="all-content">
-      <div className='button-container'>
-        <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
-        <button onClick={() => setActiveChart('business')}>Business Admin</button>
-        <button onClick={() => setActiveChart('econ')}>Economics</button>
-        <button onClick={() => setActiveChart('finance')}>Finance</button>
-        <button onClick={() => setActiveChart('marketing')}>Marketing</button>
+      {!user ? <div className='sign-in-popup'>Please sign in to view our charts...</div> :
+        <>
+          <div className='button-container'>
+            <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
+            <button onClick={() => setActiveChart('business')}>Business Admin</button>
+            <button onClick={() => setActiveChart('econ')}>Economics</button>
+            <button onClick={() => setActiveChart('finance')}>Finance</button>
+            <button onClick={() => setActiveChart('marketing')}>Marketing</button>
 
-      </div>
-      <div className="table-container">
-        {activeChart === 'software' && renderTable(softwareTableInstance)}
-        {activeChart === 'business' && renderTable(businessTableInstance)}
-        {activeChart === 'econ' && renderTable(econTableInstance)}
-        {activeChart === 'finance' && renderTable(financeTableInstance)}
-        {activeChart === 'marketing' && renderTable(marketingTableInstance)}
+          </div>
+          <div className="table-container">
+            {activeChart === 'software' && renderTable(softwareTableInstance)}
+            {activeChart === 'business' && renderTable(businessTableInstance)}
+            {activeChart === 'econ' && renderTable(econTableInstance)}
+            {activeChart === 'finance' && renderTable(financeTableInstance)}
+            {activeChart === 'marketing' && renderTable(marketingTableInstance)}
 
-      </div>
+          </div>
+        </>
+      }
     </div>
   );
 };
