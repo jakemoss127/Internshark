@@ -24,11 +24,15 @@ const Pricing = () => {
                     'View 5 most recent internships',
                     'Apply to internships',
                 ]}
+                unfeature={[
+                    'No tracking internships',
+                    'No access to major tables'
+                ]}
                 color='#FFFFFF50'/>
                 <PriceCard 
                 title='Pro'
                 type="pro"
-                price='$10'
+                price='$7.99'
                 description='Free Version'
                 features={[
                     'View all internship listings',
@@ -40,7 +44,7 @@ const Pricing = () => {
                 <PriceCard 
                 title='Gold'
                 type="gold"
-                price='$15'
+                price='$11.99'
                 description='Free Version'
                 features={[
                     'View all internship listings',

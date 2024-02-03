@@ -1,9 +1,10 @@
 import React from 'react';
 import './PriceCard.css';
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const PriceCard = (props) => {
-    const { title, price, description, features, color, type } = props;
+    const { title, price, description, features, color, type, unfeature } = props;
 
     const handleCheckout = async () => {
         let endpoint = '';
@@ -39,10 +40,18 @@ const PriceCard = (props) => {
                     {features.map((feature, key) => {
                         return <li key={key}>
 
-                            <IoCheckmarkCircleOutline className='white-icon' />
+                            <IoCheckmarkCircleOutline className='white-check' />
                             <span>{feature}</span>
                         </li>
                     })}
+                    {
+                        unfeature ? unfeature.map((feature, key) => {
+                            return <li key={key} className='unfeature'>
+                                <IoIosCloseCircleOutline className='gray-x'/>
+                                <span style={{color: '#9a9c9f'}}>{feature}</span>
+                            </li>
+                        }) : null
+                    }
                 </ul>
             </div>
             <div className='price-card-button'>

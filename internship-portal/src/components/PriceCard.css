@@ -22,16 +22,12 @@ ul {
    transition: 0.5s;
 }
 
-.white-icon {
-    color: white;
-    font-size: 1.3rem;
-}
-
 li {
     display: flex;
     flex-direction: row;
     justify-content: left;
     margin-top: 0.4rem;
+    align-items: center;
 }
 
 li span{
@@ -76,5 +72,15 @@ li span{
 .price span {
     font-size: 1rem;
     font-weight: 400;
+    color: #9a9c9f;
+}
+
+.white-check {
+    font-size: 1.6rem;
+    color: #ffffff;
+}
+
+.gray-x{
+    font-size: 1.6rem;
     color: #9a9c9f;
 }

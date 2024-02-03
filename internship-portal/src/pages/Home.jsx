@@ -1,8 +1,7 @@
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
-import { motion, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './Home.css';
-import heroImage from '../assets/hero-image.jpg';
 import collegeSvg from '../assets/colleges2.svg';
 import arrow from '../assets/arrow.svg';
 import ReactPlayer from 'react-player/youtube';
@@ -49,7 +48,7 @@ function Home() {
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 1.5, ease: 'easeInOut'}}
-          >Explore our <span className='internship-number'>{totalInternships}</span> internships</motion.h2>
+          >Explore over <span className='internship-number'>{totalInternships}</span> internships</motion.h2>
           <h3 className='subtitle'>
             Internshark is a web application designed to help students consistently mass<br/>apply to internship programs around the United States. 
           </h3>

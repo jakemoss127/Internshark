@@ -42,10 +42,10 @@
   }
   
   .see-more {
-    background: #195CB6;
+    background: #327ee2;
     border-radius: 0.625rem;
     padding: 0.75rem 1.5rem;
-    border: 2px solid #195db6;;
+    border: 2px solid #327ee2;
     color: #ffffff;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
@@ -71,7 +71,7 @@
     color: #ffffff;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
-    border: 2px solid #195db6; /* Added blue border */
+    border: 2px solid #327ee2; /* Added blue border */
     cursor: pointer;
     transition: 0.3s;
   }
@@ -103,7 +103,7 @@
   }
   
   .trusted-title {
-    margin-top: 6rem;
+    margin-top: 4rem;
     text-transform: uppercase;
     font-size: 1.2rem;
     font-family: 'Inter', sans-serif;
@@ -134,7 +134,7 @@
   }
   
   .free a:hover{
-    color: #195CB6;
+    color: #327ee2;
   }
 
   .under {
@@ -145,6 +145,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: -2rem;
   }
 
   .arrow-wrapper {
@@ -181,6 +182,7 @@
     width: 1173px;
     border-radius: 20px;
     overflow: hidden;
+    margin-top: -2rem;
   }
 
   .total-internships {
@@ -191,7 +193,7 @@
   }
 
   .internship-number {
-    color: #195CB6;
+    color: #327ee2;
     font-size: 1.2em;
   }
 
@@ -206,7 +208,7 @@
 
     .internship-number {
       font-size: 1.1rem;
-      color: #195CB6;
+      color: #327ee2;
     }
 
     .hero .subtitle {
@@ -272,7 +274,7 @@
 
 .card-icon {
   margin-top: 1rem;
-  color: #195CB6;
+  color: #327ee2;
   font-size: 2.5rem;
 }
 
