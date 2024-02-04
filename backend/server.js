@@ -19,21 +19,79 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
-const options = {
-    method: 'GET',
-    url: 'https://jsearch.p.rapidapi.com/search',
-    params: {
-        query: 'Marketing',
-        page: '1',
-        num_pages: '20',
-        date_posted: 'all',
-        employment_types: 'INTERN',
-    },
-    headers: {
-        'X-RapidAPI-Key': process.env.X_RAPID_KEY,
-        'X-RapidAPI-Host': process.env.X_RAPID_HOST,
+// const options = {
+//     method: 'GET',
+//     url: 'https://jsearch.p.rapidapi.com/search',
+//     params: {
+//         query: 'Software',
+//         page: '1',
+//         num_pages: '3',
+//         date_posted: 'all',
+//         employment_types: 'INTERN',
+//     },
+//     headers: {
+//         'X-RapidAPI-Key': process.env.X_RAPID_KEY,
+//         'X-RapidAPI-Host': process.env.X_RAPID_HOST,
+//     }
+// };
+
+// const fetchData = async () => {
+//     try {
+//         const response = await axios.request(options);
+//         const dataToSave = JSON.stringify(response.data, null, 2);
+//         fs.writeFileSync('fetchedData.json', dataToSave, 'utf-8');
+//         console.log('Data saved to fetchedData.json');
+
+//     } catch (error) {
+//         console.error(error);
+//     }
+//     return;
+// }
+
+
+const generateOptionsForSector = (sector) => {
+    return {
+        method: 'GET',
+        url: 'https://jsearch.p.rapidapi.com/search',
+        params: {
+            query: sector,
+            page: '1',
+            num_pages: '20',
+            date_posted: 'all',
+            employment_types: 'INTERN',
+        },
+        headers: {
+            'X-RapidAPI-Key': process.env.X_RAPID_KEY,
+            'X-RapidAPI-Host': process.env.X_RAPID_HOST,
+        }
+    };
+}
+
+const saveDataToDatabase = async (sector, data) => {
+    for (const job of data.data) {
+        const { employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc } = job;
+
+        const existingJob = await pool.query(`SELECT * FROM "${sector}" WHERE employer_name = $1`, [employer_name]);
+
+        if (existingJob.rows.length === 0) {
+            await pool.query(`INSERT INTO "${sector}" (employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`, [employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc]);
+        }
     }
 };
+
+
+
+const fetchDataAndSave = async (sector) => {
+    const options = generateOptionsForSector(sector);
+
+    try {
+        const response = await axios.request(options);
+        await saveDataToDatabase(sector, response.data);
+        console.log(`${sector} data fetched and saved to database.`)
+    } catch (error) {
+        console.error(`Error fetching or saving ${sector} data:`, error);
+    }
+}
 
 // STRIPE CHECKOUT PRO
 app.post('/create-checkout-session-pro', async (req, res) => {
@@ -74,20 +132,6 @@ app.post('/create-checkout-session-gold', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-
-const fetchData = async () => {
-    try {
-        const response = await axios.request(options);
-        const dataToSave = JSON.stringify(response.data, null, 2);
-        fs.writeFileSync('fetchedData.json', dataToSave, 'utf-8');
-        console.log('Data saved to fetchedData.json');
-
-    } catch (error) {
-        console.error(error);
-    }
-    return;
-}
 
 app.post('/add-jobs-software-engineering', async (req, res) => {
     try {
@@ -286,7 +330,19 @@ app.get('/total-jobs', async (req, res) => {
 app.listen(process.env.APP_PORT, () => {
     console.log('Server running on port ,', process.env.APP_PORT);
 
+    // Schedule tasks to run every day at midnight (00:00)
+    // cron.schedule('0 0 * * *', () => {
+    //     console.log('Scheduled data fetching started.');
+    //     const sectors = ['Software Engineering', 'Business', 'Econ', 'Finance', 'Marketing'];
+    //     sectors.forEach(sector => {
+    //         fetchDataAndSave(sector);
+    //     });
+    // });
 
-    //              DO NOT UNCOMMENT THIS !!!!!!!!!!!!!!
-    //fetchData();
+    // console.log('Scheduled data fetching started.');
+    // const sectors = ['Software Engineering', 'Business', 'Econ', 'Finance', 'Marketing'];
+    // sectors.forEach(sector => {
+    //     fetchDataAndSave(sector);
+    // });
+
 });
