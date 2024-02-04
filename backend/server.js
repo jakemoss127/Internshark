@@ -14,6 +14,7 @@ const pool = new Pool({
     database: process.env.DATABASE,
     password: process.env.PASSWORD,
     port: process.env.DB_PORT,
+    // connectionString: process.env.DB_CONNECTION_STRING // For when we integrate online backend
 });
 
 app.use(cors());
@@ -132,7 +133,7 @@ app.post('/create-checkout-session-gold', async (req, res) => {
 app.get('/software-engineering-jobs', async (req, res) => {
     try {
         const softwareJobs = await pool.query(
-            `SELECT * FROM "Software Engineering" WHERE job_posted_at_datetime_utc IS NOT NULL ORDER BY job_posted_at_datetime_utc DESC`,
+            `SELECT * FROM "Software" WHERE job_posted_at_datetime_utc IS NOT NULL ORDER BY job_posted_at_datetime_utc DESC`,
         )
         res.json(softwareJobs.rows)
     } catch (error) {
@@ -156,7 +157,7 @@ app.get('/business-jobs', async (req, res) => {
 app.get('/econ-jobs', async (req, res) => {
     try {
         const econJobs = await pool.query(
-            `SELECT * FROM "Econ" ORDER BY job_posted_at_datetime_utc DESC`,
+            `SELECT * FROM "Economics" ORDER BY job_posted_at_datetime_utc DESC`,
         )
         res.json(econJobs.rows)
     } catch (error) {
@@ -193,9 +194,9 @@ app.get('/total-jobs', async (req, res) => {
     try {
         const total = await pool.query(
             `SELECT 
-                (SELECT COUNT(*) FROM "Software Engineering") +
+                (SELECT COUNT(*) FROM "Software") +
                 (SELECT COUNT(*) FROM "Business") +
-                (SELECT COUNT(*) FROM "Econ") +
+                (SELECT COUNT(*) FROM "Economics") +
                 (SELECT COUNT(*) FROM "Finance") +
                 (SELECT COUNT(*) FROM "Marketing") AS TotalJobs`
         );
@@ -220,7 +221,7 @@ app.listen(process.env.APP_PORT, () => {
     // });
 
     // console.log('Scheduled data fetching started.');
-    // const sectors = ['Software Engineering', 'Business', 'Econ', 'Finance', 'Marketing'];
+    // const sectors = ['Software', 'Business', 'Economics', 'Finance', 'Marketing'];
     // sectors.forEach(sector => {
     //     fetchDataAndSave(sector);
     // });
