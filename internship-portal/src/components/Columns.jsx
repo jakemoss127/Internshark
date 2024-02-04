@@ -2,18 +2,18 @@ import './Columns.css';
 import internsharkSVG from '../assets/internshark.svg';
 
 const COLUMNS = [
-    {
-        Header: '',
-        accessor: 'employer_logo',
-        Cell: ({ value }) => (
-            <img
-            src={value || internsharkSVG}  // Use internsharkSVG as a fallback when value is falsy
-            alt=' '
-            rel="noopener noreferrer"
-            className="table-image"
-            style={{height: '40px', width: '40px'}}
-        />),
-    },
+    // {
+    //     Header: '',
+    //     accessor: 'employer_logo',
+    //     Cell: ({ value }) => (
+    //         <img
+    //         src={value || internsharkSVG}  // Use internsharkSVG as a fallback when value is falsy
+    //         alt=' '
+    //         rel="noopener noreferrer"
+    //         className="table-image"
+    //         style={{height: '40px', width: '40px'}}
+    //     />),
+    // },
     {
         Header: 'Company',
         accessor: 'employer_name',

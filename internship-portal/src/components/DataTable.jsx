@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { UserAuth } from '../context/AuthContext';
 import './DataTable.css';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 import COLUMNS from './Columns.jsx';
 import axios from 'axios'
 
@@ -55,57 +55,95 @@ const DataTable = () => {
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  const softwareTableInstance = useTable({ columns, data: softwareJobs });
-  const businessTableInstance = useTable({ columns, data: businessData });
-  const econTableInstance = useTable({ columns, data: econData });
-  const financeTableInstance = useTable({ columns, data: financeData });
-  const marketingTableInstance = useTable({ columns, data: marketingData });
+  const softwareTableInstance = useTable({ columns, data: softwareJobs }, usePagination);
+  const businessTableInstance = useTable({ columns, data: businessData }, usePagination);
+  const econTableInstance = useTable({ columns, data: econData }, usePagination);
+  const financeTableInstance = useTable({ columns, data: financeData }, usePagination);
+  const marketingTableInstance = useTable({ columns, data: marketingData }, usePagination);
 
 
 
   const renderTable = (tableInstance) => {
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      prepareRow,
+      page,
+      canPreviousPage,
+      canNextPage,
+      pageOptions,
+      pageCount,
+      gotoPage,
+      nextPage,
+      previousPage,
+      state: { pageIndex },
+    } = tableInstance;
 
+    const handleSelection = (event) => { 
+      const selectedValue = event.target.value;
+      setActiveChart(selectedValue);
+    };
+
+    const titledChart = activeChart.charAt(0).toUpperCase() + activeChart.slice(1);
     return (
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <div className="filter-bar">
+          <h1>Current Table: <span style={{color: '#4c8fe6', fontWeight: '300'}}>{titledChart}</span></h1>
+          <div className="searchbar">
+            <input type="text" placeholder="Search..." />
+            <button>Search</button>
+          </div>
+              <select id='majorDropdown' className='button-dropdown' onChange={handleSelection}>
+              <option value='software'>Default</option>
+                <option value='software'>Software Engineering</option>
+                <option value='business'>Business Admin</option>
+                <option value='econ'>Economics</option>
+                <option value='finance'>Finance</option>
+                <option value='marketing'>Marketing</option>
+              </select>
+        </div>
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (headerGroup.headers.map(column => ( <th {...column.getHeaderProps()}>{column.render('Header')}</th>))))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className="pagination">
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            Previous
+          </button>
+          <span>
+            Page&nbsp;{' '}
+            <p>
+              {pageIndex + 1} of {pageOptions.length}
+            </p>
+          </span>
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            Next
+          </button>
+        </div>
+      </>
     );
   };
-
+  
   return (
     <div className="all-content">
       {!user ? (
         <div className='sign-in-popup'>Please sign in to view our charts...</div>
       ) : status === 'Gold' ? ( // Check if the user has "Gold" status
         <>
-          <div className='button-container'>
-            <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
-            <button onClick={() => setActiveChart('business')}>Business Admin</button>
-            <button onClick={() => setActiveChart('econ')}>Economics</button>
-            <button onClick={() => setActiveChart('finance')}>Finance</button>
-            <button onClick={() => setActiveChart('marketing')}>Marketing</button>
-          </div>
           <div className="table-container">
             {activeChart === 'software' && renderTable(softwareTableInstance)}
             {activeChart === 'business' && renderTable(businessTableInstance)}

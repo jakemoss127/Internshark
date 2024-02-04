@@ -1,66 +1,97 @@
 .table-container {
-    margin-top: 4rem;
-    min-height: 100vh;
-    background-color: white;
+    margin-top: 3rem;
     border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    
+    margin-bottom: 3rem;
+    border: 1px solid rgba(229, 229, 229, 0.2); 
+}
 table {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     border-collapse: collapse;
-    max-width: 100%;
+    width: 100%;
 }
 thead {
-    background-color: #ffffff;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #777777;
-    font-weight: 500;
+    color: rgb(201, 200, 207);
+    font-size: 1.2rem;
 }
 td,
 th {
-    text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
 }
-a{
-    color: #195CB6;
+table a{
+    color: #4c8fe6;
     font-weight: bold;
 }
-tr {
-    background-color: #ffffff;
-    color: black;
+table a:hover{
+    color: #ffffff;
+    transition: 0.6s;
 }
+
+tr {
+    background-color: #2b282800;
+    color: rgb(231, 230, 230);
 }
 .button-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-direction: row;
-    padding-bottom: 4rem;
 }
-button {
-    background: #195CB6;
-    border-radius: 0.625rem;
-    padding: 0.5rem 1rem;
-    color: #ffffff;
+
+.pagination{
+    max-height: 3rem;
+    display: flex;
+    color: rgb(255, 255, 255);
+    font-family: 'Inter', sans-serif;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.pagination span{
     font-size: 1rem;
-    font-family: 'Inter', sans-serif;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination button{
+    background: #195CB6;
+    border-radius: 0.5rem;
     border: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    transition: 0.3s;
-}
-button {
-  scale: 1.07;
-  transition: 0.3s;
-}
-
-div .sign-in-popup {
-    color: #195CB6; 
-    margin-top: 4rem;
-    font-size: 3rem;
     font-family: 'Inter', sans-serif;
-    text-align: center;
+    font-size: 1rem;
+}
 
+.pagination button:disabled{
+    background: #2b2828;
+    cursor: not-allowed;
+}
+
+.filter-bar{
+    border-radius: 0.625rem;
+    border: 1px solid rgba(229, 229, 229, 0.2); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0.75rem;
+    max-height: 4rem;
+    margin-top: 1rem;
+}
+
+.filter-bar h1{
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    margin-right: 1rem;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
 }
