@@ -3,6 +3,7 @@ import { UserAuth } from '../context/AuthContext';
 import './DataTable.css';
 import { useTable } from 'react-table';
 import COLUMNS from './Columns.jsx';
+import axios from 'axios'
 
 const DataTable = () => {
 
@@ -13,6 +14,7 @@ const DataTable = () => {
   const [econData, setEconData] = useState([]);
   const [financeData, setFinanceData] = useState([]);
   const [marketingData, setMarketingData] = useState([]);
+  const [status, setStatus] = useState([])
 
 
   const [activeChart, setActiveChart] = useState('software');
@@ -27,8 +29,23 @@ const DataTable = () => {
     }
   };
 
-  useEffect(() => {
+  const getUserStatus = async () => {
+    if (user) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}get-user-status/${user.email}`)
+        const json = await response.json()
+        setStatus(json.status)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 
+  useEffect(() => {
+    getUserStatus();
+  }, [user])
+
+  useEffect(() => {
     fetchData(`${import.meta.env.VITE_BACKEND_URL}software-engineering-jobs`, setSoftwareJobs);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}business-jobs`, setBusinessData);
     fetchData(`${import.meta.env.VITE_BACKEND_URL}econ-jobs`, setEconData);
@@ -78,7 +95,9 @@ const DataTable = () => {
 
   return (
     <div className="all-content">
-      {!user ? <div className='sign-in-popup'>Please sign in to view our charts...</div> :
+      {!user ? (
+        <div className='sign-in-popup'>Please sign in to view our charts...</div>
+      ) : status === 'Gold' ? ( // Check if the user has "Gold" status
         <>
           <div className='button-container'>
             <button onClick={() => setActiveChart('software')}>Software Engineering Jobs</button>
@@ -86,7 +105,6 @@ const DataTable = () => {
             <button onClick={() => setActiveChart('econ')}>Economics</button>
             <button onClick={() => setActiveChart('finance')}>Finance</button>
             <button onClick={() => setActiveChart('marketing')}>Marketing</button>
-
           </div>
           <div className="table-container">
             {activeChart === 'software' && renderTable(softwareTableInstance)}
@@ -94,12 +112,14 @@ const DataTable = () => {
             {activeChart === 'econ' && renderTable(econTableInstance)}
             {activeChart === 'finance' && renderTable(financeTableInstance)}
             {activeChart === 'marketing' && renderTable(marketingTableInstance)}
-
           </div>
         </>
-      }
+      ) : (
+        <div className='gold-status-required'>You need a Gold status to view the charts.</div>
+      )}
     </div>
   );
+  
 };
 
 export default DataTable;

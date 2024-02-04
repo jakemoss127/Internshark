@@ -49,8 +49,6 @@ const saveDataToDatabase = async (sector, data) => {
     }
 };
 
-
-
 const fetchDataAndSave = async (sector) => {
     const options = generateOptionsForSector(sector);
 
@@ -62,6 +60,35 @@ const fetchDataAndSave = async (sector) => {
         console.error(`Error fetching or saving ${sector} data:`, error);
     }
 }
+
+app.get('/get-user-status/:userEmail', async (req, res) => {
+    const userEmail = req.params.userEmail;
+  
+    try {
+      const result = await pool.query(
+        `SELECT status FROM "Users" WHERE email = $1;`,
+        [userEmail]
+      );
+  
+      if (result.rows.length === 1) {
+        const userStatus = result.rows[0].status;
+  
+        if (userStatus === 'Gold') {
+          res.json({ status: 'Gold' });
+        } else if (userStatus === 'Pro') {
+          res.json({ status: 'Pro' });
+        } else {
+          res.json({ status: 'Basic' });
+        }
+      } else {
+        res.json({ status: 'User not found' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+    }
+  });
+  
 
 // STRIPE CHECKOUT PRO
 app.post('/create-checkout-session-pro', async (req, res) => {
@@ -82,7 +109,6 @@ app.post('/create-checkout-session-pro', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
 
 // STRIPE CHECKOUT GOLD
 app.post('/create-checkout-session-gold', async (req, res) => {
