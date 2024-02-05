@@ -117,7 +117,7 @@ function Home() {
           </div>
           <div className="card">
             <ImBooks className='card-icon'/>
-            <h1 className="card-title">Explore Diverse Fields</h1>
+            <h1 className="card-title">Explore Different Majors</h1>
             <p className="card-description">Internshark allows you to broaden your horizons by effortlessly viewing internship opportunities across multiple majors. Discover and apply for positions in various fields to align with your career aspirations.</p>
           </div>
           <div className="card">
