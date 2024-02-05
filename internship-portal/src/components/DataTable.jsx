@@ -41,7 +41,28 @@ const DataTable = () => {
     }
   }
 
+  const saveUserToDatabase = async () => {
+    // console.log(user.email, user.displayName)
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}save-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: user.displayName,
+          email: user.email,
+        }),
+      });
+    }
+    catch (error) {
+      return;
+    }
+  }
+
+
   useEffect(() => {
+    saveUserToDatabase();
     getUserStatus();
   }, [user])
 
@@ -55,8 +76,8 @@ const DataTable = () => {
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  const softwareTableInstance = useTable({ columns, data: softwareJobs, initialState: { pageIndex: 0, pageSize: 20 }}, usePagination);
-  const businessTableInstance = useTable({ columns, data: businessData, initialState: { pageIndex: 0, pageSize: 20 }}, usePagination);
+  const softwareTableInstance = useTable({ columns, data: softwareJobs, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
+  const businessTableInstance = useTable({ columns, data: businessData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
   const econTableInstance = useTable({ columns, data: econData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
   const financeTableInstance = useTable({ columns, data: financeData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
   const marketingTableInstance = useTable({ columns, data: marketingData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
@@ -80,7 +101,7 @@ const DataTable = () => {
       state: { pageIndex },
     } = tableInstance;
 
-    const handleSelection = (event) => { 
+    const handleSelection = (event) => {
       const selectedValue = event.target.value;
       setActiveChart(selectedValue);
     };
@@ -89,23 +110,23 @@ const DataTable = () => {
     return (
       <>
         <div className="filter-bar">
-          <h1>Current Table: <span style={{color: '#4c8fe6', fontWeight: '300', fontSize: '1rem'}}>{titledChart}</span></h1>
+          <h1>Current Table: <span style={{ color: '#4c8fe6', fontWeight: '300', fontSize: '1rem' }}>{titledChart}</span></h1>
           <div className="searchbar-container">
             <input className="searchbar" type="text" placeholder="Search 🔎" />
             <button className='search-button'>Search</button>
           </div>
-              <select id='majorDropdown' className='button-dropdown' onChange={handleSelection}>
-              <option value='software'>Select Major</option>
-                <option value='software'>Software Engineering</option>
-                <option value='business'>Business Admin</option>
-                <option value='econ'>Economics</option>
-                <option value='finance'>Finance</option>
-                <option value='marketing'>Marketing</option>
-              </select>
+          <select id='majorDropdown' className='button-dropdown' onChange={handleSelection}>
+            <option value='software'>Select Major</option>
+            <option value='software'>Software Engineering</option>
+            <option value='business'>Business Admin</option>
+            <option value='econ'>Economics</option>
+            <option value='finance'>Finance</option>
+            <option value='marketing'>Marketing</option>
+          </select>
         </div>
         <table {...getTableProps()}>
           <thead>
-            {headerGroups.map(headerGroup => (headerGroup.headers.map(column => ( <th {...column.getHeaderProps()}>{column.render('Header')}</th>))))}
+            {headerGroups.map(headerGroup => (headerGroup.headers.map(column => (<th {...column.getHeaderProps()}>{column.render('Header')}</th>))))}
           </thead>
           <tbody {...getTableBodyProps()}>
             {page.map(row => {
@@ -137,7 +158,7 @@ const DataTable = () => {
       </>
     );
   };
-  
+
   return (
     <div className="all-content">
       {!user ? (
@@ -157,7 +178,7 @@ const DataTable = () => {
       )}
     </div>
   );
-  
+
 };
 
 export default DataTable;

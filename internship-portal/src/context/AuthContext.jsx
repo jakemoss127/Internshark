@@ -11,7 +11,6 @@ export const AuthContextProvider = ({ children }) => {
         const provider = new GoogleAuthProvider();
         try {
             await signInWithPopup(auth, provider);
-            // No need to explicitly call setUser here, onAuthStateChanged will handle it.
         } catch (error) {
             console.error("Error during Google sign-in:", error.message);
         }
@@ -25,15 +24,13 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
-// In your AuthContextProvider component
-
-useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        console.log("Auth state changed:", currentUser);
-        setUser(currentUser);
-    });
-    return () => unsubscribe();
-}, []);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log("Auth state changed:", currentUser);
+            setUser(currentUser);
+        });
+        return () => unsubscribe();
+    }, []);
 
 
     return (

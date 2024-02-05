@@ -144,13 +144,19 @@ app.post('/create-checkout-session-gold/:userEmail', async (req, res) => {
 app.post('/save-user', async (req, res) => {
     const { name, email } = req.body;
     try {
-      await pool.query('INSERT INTO "Users" (name, email) VALUES ($1, $2)', [name, email]);
+      await pool.query(`
+        INSERT INTO "Users" (name, email) 
+        VALUES ($1, $2) 
+        ON CONFLICT (email) DO NOTHING`, 
+        [name, email]
+      );
       res.status(201).json({ message: 'User data saved successfully' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Server error' });
     }
   });
+  
 
 app.get('/software-engineering-jobs', async (req, res) => {
     try {
