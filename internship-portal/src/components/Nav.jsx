@@ -10,6 +10,7 @@ import { CgProfile } from "react-icons/cg";
 const Nav = () => { 
 
   const {user, logOut} = UserAuth();
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <div className='nav'>
@@ -32,8 +33,8 @@ const Nav = () => {
           </nav>
         </div>
         <div className="authentication-menu">
-          {!user ? <a></a> : <a style={{
-            display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'
+          {!user ? <a></a> : <a href='/settings' style={{
+            display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center', cursor: 'pointer'
           }}><CgProfile style={{marginRight: '0.5rem', color: 'white', minHeight: '20px', minWidth: '20px'}}/>{user.displayName}</a>}
           {!user && <Auth />}
           {user && <button className='sign-up' onClick={logOut}>Sign out</button>}

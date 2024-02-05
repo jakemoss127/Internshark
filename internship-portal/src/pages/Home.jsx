@@ -16,6 +16,7 @@ import { ImSphere } from "react-icons/im";
 function Home() {
 
   const [totalInternships, setTotalInternships] = useState()
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   const fetchTotal = async () => {
     try {
@@ -48,7 +49,7 @@ function Home() {
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 1.5, ease: 'easeInOut'}}
-          >Explore over <span className='internship-number'>{totalInternships}</span> internships</motion.h2>
+            >Explore over <span className='internship-number'>{totalInternships || 1500}</span> internships</motion.h2>
           <h3 className='subtitle'>
             Internshark is a web application designed to help students consistently mass<br/>apply to internship programs around the United States. 
           </h3>

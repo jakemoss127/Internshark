@@ -6,7 +6,7 @@ import Pricing from './pages/Pricing.jsx';
 import About from './pages/About.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext.jsx';
-
+import UserSettings from './pages/UserSettings.jsx';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
             <Route path='/pricing' element={<Pricing />}></Route>
             <Route path='/about' element={<About />}></Route>
             <Route path='*' element={<Home />}></Route>
+            <Route path='/settings'element={<UserSettings/>}></Route>
           </Routes>
         </BrowserRouter>
       </AuthContextProvider>

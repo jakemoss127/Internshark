@@ -55,11 +55,11 @@ const DataTable = () => {
   }, []);
 
   const columns = useMemo(() => COLUMNS, []);
-  const softwareTableInstance = useTable({ columns, data: softwareJobs }, usePagination);
-  const businessTableInstance = useTable({ columns, data: businessData }, usePagination);
-  const econTableInstance = useTable({ columns, data: econData }, usePagination);
-  const financeTableInstance = useTable({ columns, data: financeData }, usePagination);
-  const marketingTableInstance = useTable({ columns, data: marketingData }, usePagination);
+  const softwareTableInstance = useTable({ columns, data: softwareJobs, initialState: { pageIndex: 0, pageSize: 20 }}, usePagination);
+  const businessTableInstance = useTable({ columns, data: businessData, initialState: { pageIndex: 0, pageSize: 20 }}, usePagination);
+  const econTableInstance = useTable({ columns, data: econData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
+  const financeTableInstance = useTable({ columns, data: financeData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
+  const marketingTableInstance = useTable({ columns, data: marketingData, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination);
 
 
 
@@ -89,13 +89,13 @@ const DataTable = () => {
     return (
       <>
         <div className="filter-bar">
-          <h1>Current Table: <span style={{color: '#4c8fe6', fontWeight: '300'}}>{titledChart}</span></h1>
-          <div className="searchbar">
-            <input type="text" placeholder="Search..." />
-            <button>Search</button>
+          <h1>Current Table: <span style={{color: '#4c8fe6', fontWeight: '300', fontSize: '1rem'}}>{titledChart}</span></h1>
+          <div className="searchbar-container">
+            <input className="searchbar" type="text" placeholder="Search 🔎" />
+            <button className='search-button'>Search</button>
           </div>
               <select id='majorDropdown' className='button-dropdown' onChange={handleSelection}>
-              <option value='software'>Default</option>
+              <option value='software'>Select Major</option>
                 <option value='software'>Software Engineering</option>
                 <option value='business'>Business Admin</option>
                 <option value='econ'>Economics</option>
