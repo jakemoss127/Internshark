@@ -1,43 +1,31 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { UserAuth } from '../context/AuthContext.jsx';
 
 const Auth = () => {
-
-  const {user, googleSignIn, logOut} = UserAuth();
-  const [loading, setLoading] = useState(true); 
+  const { user, googleSignIn, logOut } = UserAuth();
 
   const handleSignIn = async () => {
     try {
       await googleSignIn();
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      console.log("Error during sign-in:", err.message);
     }
-  }
+  };
+
 
   const handleSignOut = async () => {
     try {
       await logOut();
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      console.log("Error during sign-out:", err.message);
     }
-  }
-
-  useEffect(() => {
-    const checkAuthentication = async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50))
-        setLoading(false)
-    }
-    checkAuthentication()
-}, [user])
+  };
 
   return (
-    <button
-        className='sign-up'
-          onClick={handleSignIn}
-        >
-          Sign in with Google
+    <button className='sign-up' onClick={handleSignIn}>
+      Sign in with Google
     </button>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;
