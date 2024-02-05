@@ -126,15 +126,8 @@ const DataTable = () => {
         </div>
         <table {...getTableProps()}>
           <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
-            ))}
+            {headerGroups.map(headerGroup => (headerGroup.headers.map(column => (<th {...column.getHeaderProps()}>{column.render('Header')}</th>))))}
           </thead>
-
           <tbody {...getTableBodyProps()}>
             {page.map(row => {
               prepareRow(row);
