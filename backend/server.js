@@ -64,36 +64,36 @@ const fetchDataAndSave = async (sector) => {
 
 app.get('/get-user-status/:userEmail', async (req, res) => {
     const userEmail = req.params.userEmail;
-  
+
     try {
-      const result = await pool.query(
-        `SELECT status FROM "Users" WHERE email = $1;`,
-        [userEmail]
-      );
-  
-      if (result.rows.length === 1) {
-        const userStatus = result.rows[0].status;
-  
-        if (userStatus === 'Gold') {
-          res.json({ status: 'Gold' });
-        } else if (userStatus === 'Pro') {
-          res.json({ status: 'Pro' });
+        const result = await pool.query(
+            `SELECT status FROM "Users" WHERE email = $1;`,
+            [userEmail]
+        );
+
+        if (result.rows.length === 1) {
+            const userStatus = result.rows[0].status;
+
+            if (userStatus === 'Gold') {
+                res.json({ status: 'Gold' });
+            } else if (userStatus === 'Pro') {
+                res.json({ status: 'Pro' });
+            } else {
+                res.json({ status: 'Basic' });
+            }
         } else {
-          res.json({ status: 'Basic' });
+            res.json({ status: 'User not found' });
         }
-      } else {
-        res.json({ status: 'User not found' });
-      }
     } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
+        console.error(error);
+        res.status(500).send('Server error');
     }
-  });
-  
+});
 
 // STRIPE CHECKOUT PRO
-app.post('/create-checkout-session-pro', async (req, res) => {
+app.post('/create-checkout-session-pro/:userEmail', async (req, res) => {
     try {
+        const userEmail = req.params.userEmail;
         const session = await stripe.checkout.sessions.create({
             mode: 'subscription',
             payment_method_types: ['card'],
@@ -105,6 +105,10 @@ app.post('/create-checkout-session-pro', async (req, res) => {
             cancel_url: `${req.headers.origin}/payment-cancelled`,
         });
 
+        await pool.query(`
+            UPDATE "Users" SET status = 'Pro' WHERE email = $1;
+        `, [userEmail])
+
         res.json({ url: session.url });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -112,8 +116,9 @@ app.post('/create-checkout-session-pro', async (req, res) => {
 });
 
 // STRIPE CHECKOUT GOLD
-app.post('/create-checkout-session-gold', async (req, res) => {
+app.post('/create-checkout-session-gold/:userEmail', async (req, res) => {
     try {
+        const userEmail = req.params.userEmail;
         const session = await stripe.checkout.sessions.create({
             mode: 'subscription',
             payment_method_types: ['card'],
@@ -124,11 +129,28 @@ app.post('/create-checkout-session-gold', async (req, res) => {
             success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/payment-cancelled`,
         });
+
+        await pool.query(`
+            UPDATE "Users" SET status = 'Gold' WHERE email = $1;
+        `, [userEmail])
+
         res.json({ url: session.url });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
+// Endpoint to save user data
+app.post('/save-user', async (req, res) => {
+    const { name, email } = req.body;
+    try {
+      await pool.query('INSERT INTO "Users" (name, email) VALUES ($1, $2)', [name, email]);
+      res.status(201).json({ message: 'User data saved successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
 
 app.get('/software-engineering-jobs', async (req, res) => {
     try {
