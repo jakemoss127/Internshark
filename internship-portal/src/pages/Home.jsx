@@ -12,6 +12,8 @@ import { ImClipboard } from "react-icons/im";
 import { ImBooks } from "react-icons/im";
 import { ImCoinDollar } from "react-icons/im";
 import { ImSphere } from "react-icons/im";
+import Shark from '../assets/shark.json';
+import Lottie from 'lottie-react';
 
 function Home() {
 
@@ -94,16 +96,20 @@ function Home() {
         <motion.div className="image-container"
           initial={{opacity: 0}}
           whileInView={{ opacity: 1 }}
-          transition={{duration: 1, ease: 'easeInOut'}}
+          transition={{duration: 0.5, ease: 'easeInOut'}}
         >
           <img src={collegeSvg} alt="colleges" className='college-svg' />
       </motion.div>
       </motion.div>
       <div className="feature-section">
-        <h1 className="our-features">Our Features</h1>
-        <p className="sub-features">
-          Internshark's powerful features help students find internships faster and more efficiently.<br/>From mass applying to tracking applications, we've got you covered.
-        </p>
+        <motion.div className="feature-titles"
+          // initial={{x: -800}}
+          // whileInView={{ x: 0 }}
+          // transition={{duration: 0.8, ease: 'easeInOut'}}
+        >
+          <h1 className="our-features">Our Features</h1>
+          <p className="sub-features">Internshark's powerful features help students find internships faster and more efficiently.<br/>From mass applying to tracking applications, we've got you covered.</p>
+        </motion.div>
         <div className="feature-grid">
           <div className="card">
             <ImEnter className='card-icon'/>
@@ -136,6 +142,22 @@ function Home() {
               <p className="card-description">Internshark offers affordable pricing plans, ensuring that access to valuable internship opportunities doesn't break the bank. Invest in your future without compromising your budget, and a step towards a successful career.</p>
           </div>
           </div>
+      </div>
+      <div className='get-started-section'>
+          <h1 className="our-features">
+            Get Started With <span style={{
+              color: '#327eeb'
+            }}>
+            Internshark </span> 
+            Today
+          </h1>
+          <p className="subtitle" style={{maxWidth: '60%'}}>
+Internshark goes beyond a typical internship platform; it's a game-changer in how you view and shape your career. Unlike traditional job searches, it transforms your approach to career development, offering more than just temporary positions.<br/> It's not just about finding internships; it's about redefining your professional journey.</p>
+        <div className="button-container">
+          <button className='more-info'>More Information</button>
+          <button className='sign-started'>Sign Up</button>
+        </div>
+        <Lottie className='shark' animationData={Shark} style={{width: '30%', height: '50%', filter: 'grayscale(1)'}} />
       </div>
       <section className='footer'>
         <Footer />
