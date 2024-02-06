@@ -83,3 +83,15 @@ a:hover {
     flex-direction: row;
     justify-content: space-around;
 }
+
+.pill{
+    color: #327ee2;
+    font-family: 'Inter', sans-serif;
+    padding: 0.25rem 0.5em;
+    background-color: #327ee245;
+    border: 2px solid #327ee2;
+    display: flex;
+    border-radius: 15px;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+}

@@ -22,6 +22,7 @@ const Nav = () => {
         <div className='logo-container'>
           <img src={internlogo} alt="Internshark Logo" className="logo" style={{maxHeight: '25px', maxWidth: '25px'}}/>
           <h1 className="logo-text">Internshark</h1>
+          <div className='pill'>Beta</div>
         </div>
         <div className="middle-menu">
           <nav className="navbar">

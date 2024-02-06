@@ -3,7 +3,7 @@ import { UserAuth } from '../context/AuthContext';
 import './DataTable.css';
 import { useTable, usePagination } from 'react-table';
 import COLUMNS from './Columns.jsx';
-import axios from 'axios'
+import { MdError } from "react-icons/md";
 
 const DataTable = () => {
 
@@ -174,7 +174,7 @@ const DataTable = () => {
           </div>
         </>
       ) : (
-        <div className='gold-status-required'>You need a Gold status to view the charts.</div>
+        <div className='gold-status-required'><MdError style={{color:'#c93d3d', fontSize: '2rem', marginRight: '1rem'}}/><h1 className="alert">Please Ensure That Your Active Status Is Pro Or Gold To View Full Charts</h1></div>
       )}
     </div>
   );
