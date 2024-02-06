@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import './PriceCard.css';
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { UserAuth } from '../context/AuthContext';
 
 
 const PriceCard = (props) => {
     const { title, price, description, features, color, type, unfeature } = props;
 
+    const { user } = UserAuth();
+
     const handleCheckout = async () => {
+        console.log("Email: ", user.email)
         let endpoint = '';
         if (type === 'pro') {
-            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-pro/${email}`;
+            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-pro/${user.email}`;
         } else if (type === 'gold') {
-            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-gold/${email}`;
+            endpoint = `${import.meta.env.VITE_BACKEND_URL}create-checkout-session-gold/${user.email}`;
         }
 
         try {
