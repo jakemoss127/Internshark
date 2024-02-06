@@ -62,6 +62,7 @@ const fetchDataAndSave = async (sector) => {
     }
 }
 
+// Endpoint to retrieve user status
 app.get('/get-user-status/:userEmail', async (req, res) => {
     const userEmail = req.params.userEmail;
 
@@ -90,7 +91,7 @@ app.get('/get-user-status/:userEmail', async (req, res) => {
     }
 });
 
-// STRIPE CHECKOUT PRO
+// Endpoint for creating a Pro subscription checkout session
 app.post('/create-checkout-session-pro/:userEmail', async (req, res) => {
     try {
         const userEmail = req.params.userEmail;
@@ -103,11 +104,8 @@ app.post('/create-checkout-session-pro/:userEmail', async (req, res) => {
             }],
             success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/payment-cancelled`,
+            metadata: { userEmail: userEmail, subscription_type: 'Pro' },
         });
-
-        await pool.query(`
-            UPDATE "Users" SET status = 'Pro' WHERE email = $1;
-        `, [userEmail])
 
         res.json({ url: session.url });
     } catch (err) {
@@ -115,7 +113,7 @@ app.post('/create-checkout-session-pro/:userEmail', async (req, res) => {
     }
 });
 
-// STRIPE CHECKOUT GOLD
+// Endpoint for creating a Gold subscription checkout session
 app.post('/create-checkout-session-gold/:userEmail', async (req, res) => {
     try {
         const userEmail = req.params.userEmail;
@@ -128,16 +126,43 @@ app.post('/create-checkout-session-gold/:userEmail', async (req, res) => {
             }],
             success_url: `${req.headers.origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/payment-cancelled`,
+            metadata: { userEmail: userEmail, subscription_type: 'Gold' },
         });
-
-        await pool.query(`
-            UPDATE "Users" SET status = 'Gold' WHERE email = $1;
-        `, [userEmail])
 
         res.json({ url: session.url });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+});
+
+// Webhook endpoint for Stripe events
+app.post('/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the checkout.session.completed event
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const userEmail = session.metadata.userEmail; // Retrieve the userEmail from metadata
+        const subscriptionType = session.metadata.subscription_type; // Retrieve subscription type from metadata
+
+        // Determine status based on subscription type
+        const userStatus = subscriptionType === 'Pro' ? 'Pro' : 'Gold';
+
+        // Update the user's status in the database
+        await pool.query(`
+            UPDATE "Users" SET status = $1 WHERE email = $2;
+        `, [userStatus, userEmail]);
+    }
+
+    // Return a response to acknowledge receipt of the event
+    res.json({received: true});
 });
 
 // Endpoint to save user data
@@ -157,7 +182,7 @@ app.post('/save-user', async (req, res) => {
     }
   });
   
-
+// Endpoint to retrieve SOFTWARE internships
 app.get('/software-engineering-jobs', async (req, res) => {
     try {
         const softwareJobs = await pool.query(
@@ -170,6 +195,7 @@ app.get('/software-engineering-jobs', async (req, res) => {
     }
 })
 
+// Endpoint to retrieve BUSINESS internships
 app.get('/business-jobs', async (req, res) => {
     try {
         const businessJobs = await pool.query(
@@ -182,6 +208,7 @@ app.get('/business-jobs', async (req, res) => {
     }
 })
 
+// Endpoint to retrieve ECONOMICS internships
 app.get('/econ-jobs', async (req, res) => {
     try {
         const econJobs = await pool.query(
@@ -194,6 +221,7 @@ app.get('/econ-jobs', async (req, res) => {
     }
 })
 
+// Endpoint to retrieve FINANCE internships
 app.get('/finance-jobs', async (req, res) => {
     try {
         const financeJobs = await pool.query(
@@ -206,6 +234,7 @@ app.get('/finance-jobs', async (req, res) => {
     }
 })
 
+// Endpoint to retrieve MARKETING internships
 app.get('/marketing-jobs', async (req, res) => {
     try {
         const marketingJobs = await pool.query(
@@ -218,6 +247,7 @@ app.get('/marketing-jobs', async (req, res) => {
     }
 })
 
+// Endpoint to retrieve TOTAL internships
 app.get('/total-jobs', async (req, res) => {
     try {
         const total = await pool.query(
