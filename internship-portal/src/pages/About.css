@@ -13,9 +13,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 8rem;
+    margin-top: 4rem;
     color: white;
-    max-width: 100%;
+    max-width: 50%;
 }
 
 .content-row {
@@ -36,8 +36,9 @@
     font-size: 1.2rem;
     font-family: 'Inter', sans-serif;
     color: #e3e2e2;
-    margin-top: 0.5rem;
+    margin-top: 2rem;
     text-align: center;
+    line-height: 2rem;
 }
 
 .team-container {
@@ -56,22 +57,22 @@
 .team-title {
     color: white;
     font-size: 2.4rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
     font-weight: 300;
+    margin-bottom: 2rem;
 }
 
 .team-card {
-    height: 28rem;
-    width: 20rem;
-    margin: 1rem;
+    height: 20rem;
+    width: 18rem;
+    margin-top: 2rem;
+    margin: 0rem;
     border-radius: 10px;
-    background: linear-gradient(180deg, #141617 0%, #1f2225 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #d1d1d1;
-    border: 1px solid #aeafb0;
 }
 
 .team-img {
@@ -122,11 +123,15 @@
 }
 
 .icon-row {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
 }
 
+.icon-row *{
+    margin: 0 0.5rem;
+}
+
 .team-name {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
