@@ -84,7 +84,7 @@ function Home() {
           transition={{duration: 1, ease: 'easeInOut'}}
         >
           <ReactPlayer 
-            url='hhttps://www.youtube.com/watch?v=1uEJT3_M1Y0&ab_channel=ProkshLuthra'
+            url='https://youtu.be/iTMLC-pSQmY'
             controls={true}
             width='100%'
             height='100%'

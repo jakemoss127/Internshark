@@ -1,6 +1,4 @@
 import './Columns.css';
-import internsharkSVG from '../assets/internshark.svg';
-
 const COLUMNS = [
     // {
     //     Header: '',
@@ -62,6 +60,15 @@ const COLUMNS = [
             </p>
           ),
     },
+    {
+        Header: 'Applied',
+        Cell: () => (
+            <div className="check-container">
+                <input type="checkbox">
+                </input>
+            </div>
+          ),
+    }
 ];
 
 export default COLUMNS;
