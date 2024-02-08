@@ -96,12 +96,13 @@ a:hover {
     font-size: 0.9rem;
 }
 
+.hamburger {
+    display: none;
+}
+
 @media (max-width: 700px){
     .nav-border {
         width: 100%;
-    }
-    .nav {
-        display: none;
     }
     .authentication-menu {
         margin-right: 1rem;
@@ -118,5 +119,40 @@ a:hover {
     }
     .pill {
         font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 1250px){
+    .nav-border {
+        width: 71rem;
+    }
+}
+
+@media (max-width: 1080px){
+    .nav-border {
+        width: 64rem;
+    }
+}
+
+@media (max-width: 985px){
+    .nav-border {
+        width: 59rem;
+    }
+}
+
+@media (max-width: 920px){
+    .nav-border {
+        display: none;
+    }
+}
+
+@media (max-width: 920px){
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        color: #e2e2e2;
+        background-color: #327ee2;
+        align-items: left;
+        justify-content: space-around;
     }
 }

@@ -10,21 +10,27 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
   const { user, logOut } = UserAuth();
-  const [showSettings, setShowSettings] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className='nav'>
+      {/* Hamburger icon */}
+      <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <div>Home</div>
+          <div>Pricing</div>
+          <div>About</div>
+        </div>
       <motion.div className='nav-border'
-      initial={{y: -100}}
-      animate={{y: 0}}
-      transition={{duration: 1, ease: 'easeInOut'}}>
-        <Link to='/' style={{textDecoration: 'none'}}>
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1, ease: 'easeInOut' }}>
+        <Link to='/' style={{ textDecoration: 'none' }}>
           <div className='logo-container'>
-            <img src={internlogo} alt="Internshark Logo" className="logo" style={{maxHeight: '25px', maxWidth: '25px'}}/>
+            <img src={internlogo} alt="Internshark Logo" className="logo" style={{ maxHeight: '25px', maxWidth: '25px' }} />
             <h1 className="logo-text">Internshark</h1>
           </div>
         </Link>
-        <div className="middle-menu">
+        <div className={`middle-menu`}>
           <nav className="navbar">
             <Link to="/">Home</Link>
             <Link to="/pricing">Pricing</Link>
@@ -38,7 +44,7 @@ const Nav = () => {
             <Link to='/settings' style={{
               display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center', cursor: 'pointer'
             }}>
-              <CgProfile style={{marginRight: '0.5rem', color: 'white', minHeight: '20px', minWidth: '20px'}}/>
+              <CgProfile style={{ marginRight: '0.5rem', color: 'white', minHeight: '20px', minWidth: '20px' }} />
               {user.displayName}
             </Link>
           ) : (
