@@ -7,19 +7,35 @@ import Auth from '../pages/Auth';
 import { UserAuth } from '../context/AuthContext';
 import { CgProfile } from "react-icons/cg";
 import { Link } from 'react-router-dom';
+import { CgMenuGridO } from "react-icons/cg";
+import { TiThMenuOutline } from "react-icons/ti";
+import { TiThMenu } from "react-icons/ti";
 
 const Nav = () => {
   const { user, logOut } = UserAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className='nav'>
       {/* Hamburger icon */}
       <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <div>Home</div>
-          <div>Pricing</div>
-          <div>About</div>
-        </div>
+        <div className="icon">
+          {!open ? <TiThMenuOutline style={{fontSize: '3rem', transition: '0.4s'}} onClick={() => setOpen(true)} /> :
+           <TiThMenu style={{fontSize: '3rem', transition: '0.4s'}} onClick={() => setOpen(false)} />
+          }
+         </div>
+         <div className="menu-container">
+          {open ? <div style={{opacity: '0', transition: '0.4s'}}></div> : 
+          <div className='menu'>
+            <a href="/home">Home</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about">About</a>
+            <a href="/profile">Profile</a>
+          </div>
+          }
+         </div>
+      </div>
       <motion.div className='nav-border'
         initial={{ y: -100 }}
         animate={{ y: 0 }}

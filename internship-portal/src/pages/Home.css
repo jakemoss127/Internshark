@@ -3,6 +3,11 @@
     margin: 0;
   }
   
+  html{
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
   .hero{
     display: flex;
     justify-content: space-between;
@@ -10,6 +15,7 @@
     flex-direction: column;
     background-color: #151719;
     min-height: 100vh;
+    overflow: hidden;
   }
   
   .title-container {

@@ -147,12 +147,28 @@ a:hover {
 }
 
 @media (max-width: 920px){
+    
     .hamburger {
+        margin-top: 1rem;
         display: flex;
-        flex-direction: column;
-        color: #e2e2e2;
-        background-color: #327ee2;
-        align-items: left;
-        justify-content: space-around;
+        font-family: 'Inter', sans-serif;
+        color: white;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu{
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(229, 229, 229, 0.2); 
+        margin-top: 2rem;
+        margin-left: 2rem;
+    }
+
+    .icon {
+       position: absolute;
+       top: 5%;
+       left: 5%;
     }
 }
+

@@ -159,9 +159,9 @@ Internshark goes beyond a typical internship platform; it's a game-changer in ho
         </div>
         <Lottie className='shark' animationData={Shark} style={{width: '30%', height: '50%', filter: 'grayscale(1)'}} />
       </div>
-      <section className='footer'>
+      {/* <section className='footer'>
         <Footer />
-      </section>
+      </section> */}
     </div>
   )
 }
