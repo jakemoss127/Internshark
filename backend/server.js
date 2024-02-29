@@ -42,7 +42,7 @@ const saveDataToDatabase = async (sector, data) => {
     for (const job of data.data) {
         const { employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc } = job;
 
-        const existingJob = await pool.query(`SELECT * FROM "${sector}" WHERE employer_name = $1`, [employer_name]);
+        const existingJob = await pool.query(`SELECT * FROM "${sector}" WHERE job_title = $1 AND employer_name = $2`, [job_title, employer_name]);
 
         if (existingJob.rows.length === 0) {
             await pool.query(`INSERT INTO "${sector}" (employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`, [employer_name, employer_website, job_title, job_apply_link, employer_logo, job_is_remote, job_city, job_state, job_posted_at_datetime_utc]);

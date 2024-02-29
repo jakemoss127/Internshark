@@ -15,8 +15,8 @@ const COLUMNS = [
     {
         Header: 'Company',
         accessor: 'employer_name',
-        Cell : ({value}) => (<p
-        style={{fontWeight: '800'}}>
+        Cell: ({ value }) => (<p
+            style={{ fontWeight: '800' }}>
             {
                 value.length > 60 ? value.substring(0, 60) + '...' : value
             }
@@ -26,13 +26,13 @@ const COLUMNS = [
     {
         Header: 'Job Title',
         accessor: 'job_title',
-        Cell : ({value}) => (
+        Cell: ({ value }) => (
             <p>
-            {
-                value.length > 60 ? value.substring(0, 60) + '...' : value
-            }
+                {
+                    value.length > 60 ? value.substring(0, 60) + '...' : value
+                }
             </p>
-          ),
+        ),
     },
     {
         Header: 'City',
@@ -47,28 +47,42 @@ const COLUMNS = [
         accessor: 'job_apply_link',
         Cell: ({ value }) => (
             <a href={value} target="_blank" rel="noopener noreferrer">
-              Apply Here
+                Apply Here
             </a>
-          ),
+        ),
     },
-    {   
+    {
         Header: 'Date Posted',
         accessor: 'job_posted_at_datetime_utc',
-        Cell: ({value}) => (
+        Cell: ({ value }) => (
             <p>
-            {new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                {new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
-          ),
+        ),
     },
     {
         Header: 'Applied',
-        Cell: () => (
-            <div className="check-container">
-                <input type="checkbox">
-                </input>
-            </div>
-          ),
+        accessor: 'id', 
+        Cell: ({ row }) => {
+            const isChecked = localStorage.getItem(row.original.job_apply_link) === 'true';
+
+            const handleChange = (e) => {
+                const checked = e.target.checked;
+                localStorage.setItem(row.original.job_apply_link, checked.toString());
+            };
+
+            return (
+                <div className="check-container">
+                    <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleChange}
+                    />
+                </div>
+            );
+        }
     }
+
 ];
 
 export default COLUMNS;
