@@ -9,7 +9,7 @@
 
 .pricing-title {
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 1.2rem;
     text-align: center;
     color: white;
@@ -25,11 +25,12 @@
     justify-content: space-around;
     align-items: center;
     border-radius: 18px;
+    margin-top: 1rem;
 }
 
 .pricing {
     font-size: 1rem;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     color: #327ee2;
     font-weight: 600;
 }
@@ -44,6 +45,7 @@
     align-items: center;
     flex-direction: row;
     margin-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 @media (max-width: 1001px) {
